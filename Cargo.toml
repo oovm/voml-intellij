@@ -1,0 +1,51 @@
+[workspace]
+resolver = "2"
+members = [
+    "projects/crates/ton-types",
+    "projects/crates/ton-metric",
+    "projects/crates/ton-geodesic",
+    "projects/crates/ton-disk",
+    "projects/crates/ton-render",
+    "projects/crates/ton-simlate",
+    "projects/crates/ton-view",
+    "projects/examples/render-schwarzschild",
+]
+default-members = [
+    "projects/crates/ton-types",
+    "projects/crates/ton-metric",
+    "projects/crates/ton-geodesic",
+    "projects/crates/ton-disk",
+    "projects/crates/ton-render",
+    "projects/crates/ton-simlate",
+    "projects/crates/ton-view",
+]
+
+[workspace.lints.rust]
+missing_docs = "allow"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+authors = ["TON Team"]
+repository = "https://github.com/oovm/blackhole"
+homepage = "https://github.com/oovm/blackhole"
+readme = "readme.md"
+keywords = ["blackhole", "gravity", "relativity", "ray-tracing"]
+categories = ["science", "simulation"]
+publish = false
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+image = { version = "0.25", default-features = false, features = ["png"] }
+ton-types = { path = "projects/crates/ton-types", version = "0.1.0" }
+ton-metric = { path = "projects/crates/ton-metric", version = "0.1.0" }
+ton-geodesic = { path = "projects/crates/ton-geodesic", version = "0.1.0" }
+ton-disk = { path = "projects/crates/ton-disk", version = "0.1.0" }
+ton-render = { path = "projects/crates/ton-render", version = "0.1.0" }
+ton-sim = { path = "projects/crates/ton-simlate", version = "0.1.0" }
+
+[profile.release]
+lto = true
+panic = "abort"

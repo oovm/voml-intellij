@@ -1,0 +1,13 @@
+[package]
+name = "ton-disk"
+description = "吸积盘模型：薄盘温度与黑体辐射"
+readme = "readme.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+ton-types = { workspace = true }
+ton-metric = { workspace = true }

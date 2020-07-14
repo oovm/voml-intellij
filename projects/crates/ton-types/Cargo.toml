@@ -1,0 +1,13 @@
+[package]
+name = "ton-types"
+description = "黑洞模拟共享类型：几何单位、时空坐标、黑洞参数"
+readme = "readme.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+thiserror = { workspace = true }

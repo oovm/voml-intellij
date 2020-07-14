@@ -1,0 +1,18 @@
+[package]
+name = "ton-view"
+description = "黑洞模拟器 CLI：渲染 PNG 帧"
+readme = "readme.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "ton-view"
+path = "src/main.rs"
+
+[dependencies]
+ton-types = { workspace = true }
+ton-sim = { workspace = true }
+image = { workspace = true }

@@ -1,0 +1,12 @@
+{
+    "name": "@ton/workspace",
+    "private": true,
+    "packageManager": "pnpm@10.28.0",
+    "description": "TON 黑洞模拟器：ton-* Rust crates + 可选前端",
+    "license": "MIT",
+    "scripts": {
+        "check": "cargo check --workspace && cargo test --workspace",
+        "test": "cargo test --workspace",
+        "render": "cargo run -p ton-view -- blackhole.png --width 800 --height 450"
+    }
+}

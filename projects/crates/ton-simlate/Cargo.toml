@@ -1,0 +1,15 @@
+[package]
+name = "ton-sim"
+description = "黑洞场景编排：质量、盘、相机与单帧渲染"
+readme = "readme.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+ton-types = { workspace = true }
+ton-disk = { workspace = true }
+ton-render = { workspace = true }
+ton-geodesic = { workspace = true }

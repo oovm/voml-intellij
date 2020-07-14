@@ -1,0 +1,67 @@
+{
+    "name": "@wae/wae",
+    "version": "0.0.0",
+    "description": "WAE 工程 CLI（Node/TypeScript；取代 Rust wae-cli）",
+    "type": "module",
+    "bin": {
+        "wae": "./bin/wae.mjs"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        }
+    },
+    "files": [
+        "bin",
+        "dist",
+        "templates"
+    ],
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "check": "tsc -p tsconfig.json --noEmit",
+        "prepublishOnly": "tsc -p tsconfig.json"
+    },
+    "dependencies": {
+        "@wae/commander": "workspace:*",
+        "@wae/serverless": "workspace:*",
+        "@wae/types": "workspace:*",
+        "esbuild": "^0.25.0"
+    },
+    "peerDependencies": {
+        "vite": "^7.0.0"
+    },
+    "peerDependenciesMeta": {
+        "vite": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "catalog:",
+        "vite": "catalog:"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/oovm/wae.git"
+    },
+    "homepage": "https://github.com/oovm/wae",
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "optionalDependencies": {
+        "@wae/wae-unknown-wasm32": "workspace:*",
+        "@wae/wae-win32-x64": "workspace:*",
+        "@wae/wae-win32-arm64": "workspace:*",
+        "@wae/wae-darwin-x64": "workspace:*",
+        "@wae/wae-darwin-arm64": "workspace:*",
+        "@wae/wae-linux-x64": "workspace:*",
+        "@wae/wae-linux-arm64": "workspace:*",
+        "@wae/wae-android-arm64": "workspace:*",
+        "@wae/wae-ios-arm64": "workspace:*"
+    }
+}

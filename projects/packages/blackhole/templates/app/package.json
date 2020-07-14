@@ -1,0 +1,14 @@
+{
+    "name": "wae-app-template",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "@wae/client": "workspace:*",
+        "@wae/core": "workspace:*",
+        "@wae/serverless": "workspace:*"
+    },
+    "devDependencies": {
+        "@wae/wae": "workspace:*",
+        "typescript": "catalog:"
+    }
+}

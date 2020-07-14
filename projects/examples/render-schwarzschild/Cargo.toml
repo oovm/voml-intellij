@@ -1,0 +1,17 @@
+[package]
+name = "ton-example-render-schwarzschild"
+description = "史瓦西黑洞单帧渲染示例"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+publish = false
+
+[[bin]]
+name = "render-schwarzschild"
+path = "src/main.rs"
+
+[dependencies]
+ton-types = { workspace = true }
+ton-sim = { workspace = true }
+image = { workspace = true }
