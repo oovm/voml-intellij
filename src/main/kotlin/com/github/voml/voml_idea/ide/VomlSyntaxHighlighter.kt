@@ -24,7 +24,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.COMMA -> VomlColor.COMMA
             VomlTypes.BOOLEAN -> VomlColor.BOOLEAN
             VomlTypes.IDENT -> VomlColor.IDENTIFIER
-            TokenType.BAD_CHARACTER -> VomlColor.BAD_CHAR
+            TokenType.BAD_CHARACTER -> VomlColor.BAD_CHARACTER
             else -> getTokenColorSpecial(tokenType)
         }
     }
@@ -34,10 +34,13 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
             VomlTypes.BRACKETL, VomlTypes.BRACKETR -> VomlColor.BRACKETS
             VomlTypes.BRACEL, VomlTypes.BRACER -> VomlColor.BRACES
-            VomlTypes.INTEGER, VomlTypes.FLOAT -> VomlColor.NUMBER
+            VomlTypes.INTEGER-> VomlColor.INTEGER
+            VomlTypes.FLOAT -> VomlColor.DECIMAL
             VomlTypes.STRING, VomlTypes.RAW_STRING, VomlTypes.CHAR -> VomlColor.STRING
-            VomlTypes.SOME, VomlTypes.NONE -> VomlColor.OPTION
-            VomlTypes.COMMENT, VomlTypes.BLOCK_COMMENT -> VomlColor.LINE_COMMENT
+            VomlTypes.SOME -> VomlColor.OPTION
+            VomlTypes.NONE -> VomlColor.NULL
+            VomlTypes.COMMENT-> VomlColor.LINE_COMMENT
+            VomlTypes.BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
             else -> null
         }
     }

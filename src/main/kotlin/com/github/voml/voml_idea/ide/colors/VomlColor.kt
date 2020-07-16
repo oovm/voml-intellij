@@ -2,6 +2,7 @@ package com.github.voml.voml_idea.ide.colors
 
 import com.github.voml.voml_idea.language.VomlBundle
 import com.intellij.lang.annotation.HighlightSeverity
+import com.intellij.openapi.editor.HighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.options.OptionsBundle
 import com.intellij.openapi.options.colors.AttributesDescriptor
@@ -13,8 +14,8 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     // 字面量
     NULL(VomlBundle.messagePointer("color.settings.toml.null"), Default.KEYWORD),
     BOOLEAN(VomlBundle.messagePointer("color.settings.toml.boolean"), Default.KEYWORD),
-    NUMBER(OptionsBundle.messagePointer("options.language.defaults.number"), Default.NUMBER),
-    INTEGER(OptionsBundle.messagePointer("options.language.defaults.number"), Default.NUMBER),
+    DECIMAL(VomlBundle.messagePointer("color.settings.toml.decimal"), Default.NUMBER),
+    INTEGER(VomlBundle.messagePointer("color.settings.toml.integer"), Default.NUMBER),
     STRING(OptionsBundle.messagePointer("options.language.defaults.string"), Default.KEYWORD),
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
     //
@@ -26,19 +27,17 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     BRACES(OptionsBundle.messagePointer("options.language.defaults.braces"), Default.BRACES),
     DOT(OptionsBundle.messagePointer("options.language.defaults.dot"), Default.DOT),
     COMMA(OptionsBundle.messagePointer("options.language.defaults.comma"), Default.COMMA),
+    COLON(VomlBundle.messagePointer("color.settings.toml.colon"), Default.OPERATION_SIGN),
     SEMICOLON(OptionsBundle.messagePointer("options.language.defaults.semicolon"), Default.SEMICOLON),
     // 注释
     LINE_COMMENT(OptionsBundle.messagePointer("options.language.defaults.line.comment"), Default.LINE_COMMENT),
     BLOCK_COMMENT(OptionsBundle.messagePointer("options.language.defaults.block.comment"), Default.BLOCK_COMMENT),
     // 错误
-    COLON(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.OPERATION_SIGN),
-    BAD_CHAR(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    OPTION(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    EXTENSION(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-
+    BAD_CHARACTER(OptionsBundle.messagePointer("options.language.defaults.identifier"), HighlighterColors.BAD_CHARACTER),
+    // 需要移除
+    OPTION(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.INSTANCE_FIELD),
+    EXTENSION(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
     ;
-
-
 
     val textAttributesKey: TextAttributesKey = TextAttributesKey.createTextAttributesKey("voml.lang.$name", default)
     val attributesDescriptor: AttributesDescriptor = AttributesDescriptor(humanName, textAttributesKey)
