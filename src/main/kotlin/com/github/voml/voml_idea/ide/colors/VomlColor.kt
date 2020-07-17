@@ -33,9 +33,9 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     LINE_COMMENT(OptionsBundle.messagePointer("options.language.defaults.line.comment"), Default.LINE_COMMENT),
     BLOCK_COMMENT(OptionsBundle.messagePointer("options.language.defaults.block.comment"), Default.BLOCK_COMMENT),
     // 错误
-    BAD_CHARACTER(OptionsBundle.messagePointer("options.language.defaults.identifier"), HighlighterColors.BAD_CHARACTER),
+    BAD_CHARACTER(OptionsBundle.messagePointer("options.java.attribute.descriptor.bad.character"), HighlighterColors.BAD_CHARACTER),
     // 需要移除
-    OPTION(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.INSTANCE_FIELD),
+    OPTION(OptionsBundle.messagePointer("options.language.defaults.instance.field"), Default.INSTANCE_FIELD),
     EXTENSION(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
     ;
 

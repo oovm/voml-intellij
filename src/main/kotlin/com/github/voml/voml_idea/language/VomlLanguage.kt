@@ -16,9 +16,9 @@ class VomlLanguage private constructor() : Language("Voml") {
 }
 
 class VomlFileType private constructor() : LanguageFileType(VomlLanguage.INSTANCE) {
-    override fun getName(): String = VomlBundle.messagePointer("filetype.voml.name").get()
+    override fun getName(): String = VomlBundle.message("filetype.voml.name")
 
-    override fun getDescription(): String = VomlBundle.messagePointer("filetype.voml.description").get()
+    override fun getDescription(): String = VomlBundle.message("filetype.voml.description")
 
     override fun getDefaultExtension(): String = "Voml"
 
