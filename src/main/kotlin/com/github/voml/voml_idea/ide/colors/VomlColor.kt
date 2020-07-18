@@ -10,7 +10,11 @@ import com.intellij.openapi.util.NlsContexts
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
 import java.util.function.Supplier
 
+
+// TODO: 分类
 enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, default: TextAttributesKey? = null) {
+    // 特殊关键词
+    IMPORT(VomlBundle.messagePointer("color.settings.toml.import"), Default.KEYWORD),
     // 字面量
     NULL(VomlBundle.messagePointer("color.settings.toml.null"), Default.KEYWORD),
     BOOLEAN(VomlBundle.messagePointer("color.settings.toml.boolean"), Default.KEYWORD),
@@ -34,8 +38,7 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     BLOCK_COMMENT(OptionsBundle.messagePointer("options.language.defaults.block.comment"), Default.BLOCK_COMMENT),
     // 错误
     BAD_CHARACTER(OptionsBundle.messagePointer("options.java.attribute.descriptor.bad.character"), HighlighterColors.BAD_CHARACTER),
-    // 需要移除
-    OPTION(OptionsBundle.messagePointer("options.language.defaults.instance.field"), Default.INSTANCE_FIELD),
+    // 废弃
     EXTENSION(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
     ;
 
