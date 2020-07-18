@@ -11,14 +11,14 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlNullImpl extends ASTWrapperPsiElement implements VomlNull {
+public class VomlDictScopeImpl extends ASTWrapperPsiElement implements VomlDictScope {
 
-  public VomlNullImpl(@NotNull ASTNode node) {
+  public VomlDictScopeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitNull(this);
+    visitor.visitDictScope(this);
   }
 
   @Override

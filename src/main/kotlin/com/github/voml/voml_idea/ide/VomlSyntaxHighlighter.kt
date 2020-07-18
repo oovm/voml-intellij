@@ -36,9 +36,8 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.BRACEL, VomlTypes.BRACER -> VomlColor.BRACES
             VomlTypes.INTEGER-> VomlColor.INTEGER
             VomlTypes.DECIMAL -> VomlColor.DECIMAL
-            VomlTypes.STRING, VomlTypes.RAW_STRING, VomlTypes.CHAR -> VomlColor.STRING
-            VomlTypes.SOME -> VomlColor.OPTION
-            VomlTypes.NONE -> VomlColor.NULL
+            VomlTypes.STRING, VomlTypes.RAW_STRING -> VomlColor.STRING
+            VomlTypes.NULL -> VomlColor.NULL
             VomlTypes.COMMENT-> VomlColor.LINE_COMMENT
             VomlTypes.BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
             else -> null

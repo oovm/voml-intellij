@@ -1,7 +1,6 @@
 package com.github.voml.voml_idea.ide.annotator
 
 import com.github.voml.voml_idea.ide.colors.VomlColor
-import com.github.voml.voml_idea.language.psi.VomlExt
 import com.github.voml.voml_idea.language.psi.VomlObject
 import com.github.voml.voml_idea.language.psi.VomlEnum
 import com.github.voml.voml_idea.language.psi.VomlNamedField
@@ -15,12 +14,12 @@ class VomlHighlightingAnnotator : AnnotatorBase() {
         if (holder.isBatchMode || parent == null) return
 
         when (parent) {
-            is VomlExt -> if (parent.ident != element) {
-                holder
-                    .newSilentAnnotation(HighlightSeverity.INFORMATION)
-                    .textAttributes(VomlColor.EXTENSION.textAttributesKey)
-                    .create()
-            }
+//            is VomlExt -> if (parent.ident != element) {
+//                holder
+//                    .newSilentAnnotation(HighlightSeverity.INFORMATION)
+//                    .textAttributes(VomlColor.EXTENSION.textAttributesKey)
+//                    .create()
+//            }
             is VomlObject -> if (parent.ident == element) {
                 holder
                     .newSilentAnnotation(HighlightSeverity.INFORMATION)
