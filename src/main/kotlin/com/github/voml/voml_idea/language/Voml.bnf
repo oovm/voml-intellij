@@ -1,0 +1,95 @@
+{
+    parserClass = "com.github.voml.voml_idea.language.parser.VomlParser"
+    parserUtilClass = "com.github.voml.voml_idea.language.psi.VomlParserUtil"
+
+    extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix = "Voml"
+    psiImplClassSuffix = "Impl"
+    psiPackage = "com.github.voml.voml_idea.language.psi"
+    psiImplPackage = "com.github.voml.voml_idea.language.psi.impl"
+
+    elementTypeHolderClass = "com.github.voml.voml_idea.language.psi.VomlTypes"
+    elementTypeClass = "com.github.voml.voml_idea.language.psi.VomlElementType"
+    tokenTypeClass = "com.github.voml.voml_idea.language.psi.VomlTokenType"
+
+    psiImplUtilClass = "com.github.voml.voml_idea.language.psi.impl.VomlPsiImplUtil"
+
+    tokens = [
+        COMMENT = "regexp://[^\r\n]*"
+        BLOCK_COMMENT = "regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]"
+        NULL = "null"
+        IMPORT = "@import"
+
+        BOOLEAN = "regexp:true|false"
+
+        IDENT = "regexp:[A-Za-z_][A-Za-z0-9_]*"
+
+        BYTE ="regexp:(0[bBoOxX][0-9A-Fa-f][0-9A-Fa-f_]*)"
+        INTEGER = "regexp:(0|[1-9][0-9_]*)"
+        FLOAT = "regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)"
+        SIGN = "regexp:[+-]"
+
+        STRING = "STRING"
+        RAW_STRING = "RAW STRING"
+
+        PARENTHESIS_L = "("
+        PARENTHESIS_R = ")"
+        BRACKET_L = "["
+        BRACKET_R = "]"
+        BRACE_L = "{"
+        BRACE_R = "}"
+        EQ = "="
+        COLON = ":"
+        COMMA = ","
+        CITE = "$"
+        DOT = "."
+        SPACE='regexp:\s+'
+    ]
+}
+
+Voml ::= [head*] [expression*];
+
+private head ::= import_statement;
+expression ::= dict_scope | list_scope | kv_pair;
+
+import_statement ::= IMPORT BRACE_L symbol_path BRACE_R;
+symbol_path ::= key_like (DOT key_like)*;
+key_path ::= [DOT*] symbol_path;
+
+private key_like ::= string | IDENT | INTEGER;
+
+dict_scope ::= BRACE_L key_path BRACE_R;
+list_scope ::= BRACKET_L key_path BRACKET_R;
+
+private eq ::= EQ | COLON;
+
+kv_pair ::= symbol_path eq value {methods = "KVPair"};
+
+value ::= NULL | BOOLEAN | num | reference | string | list | dict | BYTE | enum;
+
+unit ::= IDENT;
+
+private num ::= [SIGN] (INTEGER | DECIMAL) [unit];
+
+private string ::= STRING | RAW_STRING;
+
+reference ::= CITE symbol_path;
+
+type_hint ::= IDENT;
+
+list ::= [type_hint] BRACKET_L [value (COMMA value)* [COMMA]] BRACKET_R;
+
+dict ::= [type_hint] BRACE_L [kv_pair (COMMA kv_pair)* [COMMA]] BRACE_R;
+
+named_field ::= IDENT COLON value;
+
+object_entry ::= named_field;
+
+object_body ::= PARENTHESIS_L [object_entry (COMMA object_entry)* [COMMA]] PARENTHESIS_R;
+
+tuple_body ::= PARENTHESIS_L [value (COMMA value)* [COMMA]] PARENTHESIS_R;
+
+enum ::= IDENT;
+
+object ::= [IDENT] (object_body | tuple_body);
