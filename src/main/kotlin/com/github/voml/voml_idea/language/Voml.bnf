@@ -33,63 +33,60 @@
         STRING = "STRING"
         RAW_STRING = "RAW STRING"
 
-        TUPLE_L = "("
-        TUPLE_R = ")"
-        LIST_L = "["
-        LIST_R = "]"
-        DICT_L = "{"
-        DICT_R = "}"
+        PARENTHESIS_L = "("
+        PARENTHESIS_R = ")"
+        BRACKET_L = "["
+        BRACKET_R = "]"
+        BRACE_L = "{"
+        BRACE_R = "}"
         EQ = "="
+        NAN = "nan"
         COLON = ":"
         COMMA = ","
         CITE = "$"
         DOT = "."
+        STAR = "*"
         SPACE='regexp:\s+'
     ]
 }
 
-Voml ::= [head*] [expression*];
+Voml ::= expression*;
 
-private head ::= import_statement;
-expression ::= dict_scope | list_scope | kv_pair;
-
+expression ::= scope
+	| insert_pair
+	| insert_item
+	| import_statement;
+// ------------------------------------
 import_statement ::= IMPORT BRACE_L symbol_path BRACE_R;
 symbol_path ::= key_like (DOT key_like)*;
+
+
+private key_like ::= str | IDENT | INTEGER;
 key_path ::= [DOT*] symbol_path;
 
-private key_like ::= string | IDENT | INTEGER;
-
-dict_scope ::= BRACE_L key_path BRACE_R;
-list_scope ::= BRACKET_L key_path BRACKET_R;
-
+// ------------------------------------
+scope ::= <<paired key_path>>;
+insert_pair ::= symbol_path eq value;
+insert_item ::= (DOT|STAR) value;
 private eq ::= EQ | COLON;
+// ------------------------------------
+value ::= NULL | BOOLEAN | num | reference | str | table;
 
-kv_pair ::= symbol_path eq value {methods = "KVPair"};
+type_hint ::= IDENT;
+string_prefix ::= IDENT;
+number_suffix ::= IDENT;
 
-value ::= NULL | BOOLEAN | num | reference | string | list | dict | BYTE | enum;
-
-unit ::= IDENT;
-
-private num ::= [SIGN] (INTEGER | DECIMAL) [unit];
-
-private string ::= STRING | RAW_STRING;
+private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
+private str ::= [string_prefix] (STRING | RAW_STRING);
+private other_num ::= NAN;
 
 reference ::= CITE symbol_path;
 
-type_hint ::= IDENT;
+table ::= [type_hint] <<paired table_inner>>;
 
-list ::= [type_hint] BRACKET_L [value (COMMA value)* [COMMA]] BRACKET_R;
+private table_inner ::= [insert_pair (COMMA insert_pair)* [COMMA]];
 
-dict ::= [type_hint] BRACE_L [kv_pair (COMMA kv_pair)* [COMMA]] BRACE_R;
-
-named_field ::= IDENT COLON value;
-
-object_entry ::= named_field;
-
-object_body ::= PARENTHESIS_L [object_entry (COMMA object_entry)* [COMMA]] PARENTHESIS_R;
-
-tuple_body ::= PARENTHESIS_L [value (COMMA value)* [COMMA]] PARENTHESIS_R;
-
-enum ::= IDENT;
-
-object ::= [IDENT] (object_body | tuple_body);
+meta paired ::=
+    PARENTHESIS_L <<param>> PARENTHESIS_R
+  | BRACKET_L <<param>> BRACKET_R
+  | BRACE_L <<param>> BRACE_R

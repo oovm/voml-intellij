@@ -11,20 +11,32 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlDictScopeImpl extends ASTWrapperPsiElement implements VomlDictScope {
+public class VomlTableImpl extends ASTWrapperPsiElement implements VomlTable {
 
-  public VomlDictScopeImpl(@NotNull ASTNode node) {
+  public VomlTableImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitDictScope(this);
+    visitor.visitTable(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof VomlVisitor) accept((VomlVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public VomlPaired getPaired() {
+    return findNotNullChildByClass(VomlPaired.class);
+  }
+
+  @Override
+  @Nullable
+  public VomlTypeHint getTypeHint() {
+    return findChildByClass(VomlTypeHint.class);
   }
 
 }

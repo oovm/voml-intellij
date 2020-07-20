@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VomlDictScope extends PsiElement {
+public interface VomlStringPrefix extends PsiElement {
+
+  @NotNull
+  PsiElement getIdent();
 
 }

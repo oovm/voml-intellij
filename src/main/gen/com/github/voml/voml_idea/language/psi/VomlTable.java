@@ -4,8 +4,13 @@ package com.github.voml.voml_idea.language.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLanguageInjectionHost;
 
-public interface VomlString extends VomlValue, PsiLanguageInjectionHost {
+public interface VomlTable extends PsiElement {
+
+  @NotNull
+  VomlPaired getPaired();
+
+  @Nullable
+  VomlTypeHint getTypeHint();
 
 }
