@@ -1,0 +1,23 @@
+
+{a}
+{.b1}
+key = "a.b1.key"
+{>b2}  // {^.b2}
+key = "a.b2.key"
+{>b1}
+key = "a.b1.key"
+{.c1}
+key = "a.b1.c1.key"
+
+--- // 返回顶级
+
+connection_max.a = 5cm
+{
+	a = Some(1)
+    b = None()
+}
+
+[name]
+~ a = 2
+* a
+* b
