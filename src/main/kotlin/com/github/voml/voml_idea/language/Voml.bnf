@@ -70,7 +70,7 @@ insert_pair ::= symbol_path eq value;
 insert_item ::= (DOT|STAR) value;
 private eq ::= EQ | COLON;
 // ------------------------------------
-value ::= NULL | BOOLEAN | num | reference | str | table;
+value ::= NULL | BOOLEAN | num | ref | str | table;
 
 type_hint ::= IDENT;
 string_prefix ::= IDENT;
@@ -80,7 +80,7 @@ private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other
 private str ::= [string_prefix] (STRING | RAW_STRING);
 private other_num ::= NAN;
 
-reference ::= CITE symbol_path;
+ref ::= CITE symbol_path;
 
 table ::= [type_hint] <<paired table_inner>>;
 

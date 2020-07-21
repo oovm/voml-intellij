@@ -11,14 +11,14 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlReferenceImpl extends ASTWrapperPsiElement implements VomlReference {
+public class VomlRefImpl extends ASTWrapperPsiElement implements VomlRef {
 
-  public VomlReferenceImpl(@NotNull ASTNode node) {
+  public VomlRefImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitReference(this);
+    visitor.visitRef(this);
   }
 
   @Override

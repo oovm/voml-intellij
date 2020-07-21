@@ -21,12 +21,12 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
     private fun getTokenColor(tokenType: IElementType): VomlColor? {
         return when (tokenType) {
             //
-            VomlTypes.INCLUDE -> VomlColor.IMPORT
+            VomlTypes.IMPORT -> VomlColor.IMPORT
             //
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
-            VomlTypes.BRACKETL, VomlTypes.BRACKETR -> VomlColor.BRACKETS
-            VomlTypes.BRACEL, VomlTypes.BRACER -> VomlColor.BRACES
-            VomlTypes.COLON -> VomlColor.COLON
+            VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS
+            VomlTypes.BRACE_L, VomlTypes.BRACE_R -> VomlColor.BRACES
+            VomlTypes.COLON, VomlTypes.EQ -> VomlColor.COLON
             VomlTypes.COMMA -> VomlColor.COMMA
             //
             VomlTypes.NULL -> VomlColor.NULL

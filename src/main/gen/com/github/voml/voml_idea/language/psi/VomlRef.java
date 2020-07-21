@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VomlReference extends PsiElement {
+public interface VomlRef extends PsiElement {
 
   @NotNull
   VomlSymbolPath getSymbolPath();

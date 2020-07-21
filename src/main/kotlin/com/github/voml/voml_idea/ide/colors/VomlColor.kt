@@ -23,6 +23,9 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     STRING(OptionsBundle.messagePointer("options.language.defaults.string"), Default.KEYWORD),
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
     //
+    TYPE_HINT(VomlBundle.messagePointer("color.settings.toml.type_hint"), Default.IDENTIFIER),
+    NUMBER_HINT(VomlBundle.messagePointer("color.settings.toml.number_hint"), Default.IDENTIFIER),
+    STRING_HINT(VomlBundle.messagePointer("color.settings.toml.string_hint"), Default.IDENTIFIER),
     OBJECT_NAME(VomlBundle.messagePointer("color.settings.toml.object_name"), Default.IDENTIFIER),
     KEY_NAME(VomlBundle.messagePointer("color.settings.toml.key_name"), Default.STATIC_FIELD),
     // 标点符号
