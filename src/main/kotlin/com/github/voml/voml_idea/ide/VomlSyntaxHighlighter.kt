@@ -22,18 +22,21 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
         return when (tokenType) {
             //
             VomlTypes.IMPORT -> VomlColor.IMPORT
+            VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
+            VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
+            VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
             //
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
             VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS
             VomlTypes.BRACE_L, VomlTypes.BRACE_R -> VomlColor.BRACES
             VomlTypes.COLON, VomlTypes.EQ -> VomlColor.COLON
             VomlTypes.COMMA -> VomlColor.COMMA
-            //
+            // atom
             VomlTypes.NULL -> VomlColor.NULL
             VomlTypes.BOOLEAN -> VomlColor.BOOLEAN
             VomlTypes.INTEGER-> VomlColor.INTEGER
             VomlTypes.DECIMAL -> VomlColor.DECIMAL
-            VomlTypes.STRING -> VomlColor.STRING
+            VomlTypes.STRING_INLINE -> VomlColor.STRING
             VomlTypes.IDENT -> VomlColor.IDENTIFIER
             // 注释
             VomlTypes.COMMENT-> VomlColor.LINE_COMMENT

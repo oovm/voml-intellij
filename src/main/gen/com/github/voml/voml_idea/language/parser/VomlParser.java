@@ -63,6 +63,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
   // 	| insert_pair
   // 	| insert_item
   // 	| import_statement
+  // 	| SEMICOLON
   public static boolean expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression")) return false;
     boolean r;
@@ -71,6 +72,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
     if (!r) r = insert_pair(b, l + 1);
     if (!r) r = insert_item(b, l + 1);
     if (!r) r = import_statement(b, l + 1);
+    if (!r) r = consumeToken(b, SEMICOLON);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -333,20 +335,53 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<paired key_path>>
+  // <<paired scope_inner>>
   public static boolean scope(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scope")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SCOPE, "<scope>");
-    r = paired(b, l + 1, VomlParser::key_path);
+    r = paired(b, l + 1, VomlParser::scope_inner);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // [string_prefix] (STRING | RAW_STRING)
+  // [scope_mark] key_path
+  static boolean scope_inner(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_inner")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = scope_inner_0(b, l + 1);
+    r = r && key_path(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // [scope_mark]
+  private static boolean scope_inner_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_inner_0")) return false;
+    scope_mark(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ACCENT | ANGLE_L | ANGLE_R
+  public static boolean scope_mark(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_mark")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, SCOPE_MARK, "<scope mark>");
+    r = consumeToken(b, ACCENT);
+    if (!r) r = consumeToken(b, ANGLE_L);
+    if (!r) r = consumeToken(b, ANGLE_R);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // [string_prefix] (string_inline)
   static boolean str(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "str")) return false;
+    if (!nextTokenIs(b, "", IDENT, QUOTATION)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = str_0(b, l + 1);
@@ -362,12 +397,25 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // STRING | RAW_STRING
+  // (string_inline)
   private static boolean str_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "str_1")) return false;
     boolean r;
-    r = consumeToken(b, STRING);
-    if (!r) r = consumeToken(b, RAW_STRING);
+    Marker m = enter_section_(b);
+    r = string_inline(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // QUOTATION IDENT QUOTATION
+  public static boolean string_inline(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_inline")) return false;
+    if (!nextTokenIs(b, QUOTATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, QUOTATION, IDENT, QUOTATION);
+    exit_section_(b, m, STRING_INLINE, r);
     return r;
   }
 

@@ -30,15 +30,16 @@
         FLOAT = "regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)"
         SIGN = "regexp:[+-]"
 
-        STRING = "STRING"
-        RAW_STRING = "RAW STRING"
-
         PARENTHESIS_L = "("
         PARENTHESIS_R = ")"
         BRACKET_L = "["
         BRACKET_R = "]"
         BRACE_L = "{"
         BRACE_R = "}"
+        ACCENT = "^"
+        ANGLE_L = "<"
+        ANGLE_R = ">"
+        QUOTATION = "\""
         EQ = "="
         NAN = "nan"
         COLON = ":"
@@ -69,7 +70,7 @@ key_path ::= [DOT*] symbol_path;
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
 private scope_inner ::= [scope_mark] key_path;
-scope_mark ::= DOT;
+scope_mark ::= ACCENT | ANGLE_L | ANGLE_R;
 
 pair ::= symbol_path eq value;
 private eq ::= EQ | COLON;
@@ -82,7 +83,10 @@ string_prefix ::= IDENT;
 number_suffix ::= IDENT;
 // ------------------------------------
 private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
-private str ::= [string_prefix] (STRING | RAW_STRING);
+
+string_inline ::= QUOTATION IDENT QUOTATION;
+
+private str ::= [string_prefix] (string_inline);
 private other_num ::= NAN;
 // ------------------------------------
 ref ::= CITE symbol_path;
