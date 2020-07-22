@@ -42,6 +42,7 @@
         EQ = "="
         NAN = "nan"
         COLON = ":"
+        SEMICOLON = ";"
         COMMA = ","
         CITE = "$"
         DOT = "."
@@ -55,7 +56,8 @@ Voml ::= expression*;
 expression ::= scope
 	| insert_pair
 	| insert_item
-	| import_statement;
+	| import_statement
+	| SEMICOLON;
 // ------------------------------------
 import_statement ::= IMPORT BRACE_L symbol_path BRACE_R;
 symbol_path ::= key_like (DOT key_like)*;
@@ -65,27 +67,30 @@ private key_like ::= str | IDENT | INTEGER;
 key_path ::= [DOT*] symbol_path;
 
 // ------------------------------------
-scope ::= <<paired key_path>>;
-insert_pair ::= symbol_path eq value;
-insert_item ::= (DOT|STAR) value;
+scope ::= <<paired scope_inner>>;
+private scope_inner ::= [scope_mark] key_path;
+scope_mark ::= DOT;
+
+pair ::= symbol_path eq value;
 private eq ::= EQ | COLON;
+insert_pair ::= [DOT] pair;
+insert_item ::= (DOT|STAR) value;
 // ------------------------------------
 value ::= NULL | BOOLEAN | num | ref | str | table;
-
 type_hint ::= IDENT;
 string_prefix ::= IDENT;
 number_suffix ::= IDENT;
-
+// ------------------------------------
 private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
 private str ::= [string_prefix] (STRING | RAW_STRING);
 private other_num ::= NAN;
-
+// ------------------------------------
 ref ::= CITE symbol_path;
-
+// ------------------------------------
 table ::= [type_hint] <<paired table_inner>>;
-
-private table_inner ::= [insert_pair (COMMA insert_pair)* [COMMA]];
-
+private table_inner ::= [table_item (COMMA table_item)* [COMMA]];
+private table_item ::= pair | value;
+// ------------------------------------
 meta paired ::=
     PARENTHESIS_L <<param>> PARENTHESIS_R
   | BRACKET_L <<param>> BRACKET_R
