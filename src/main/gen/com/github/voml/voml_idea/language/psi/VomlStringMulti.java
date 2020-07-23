@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VomlStringInline extends PsiElement {
+public interface VomlStringMulti extends PsiElement {
 
   @NotNull
   List<VomlEscaped> getEscapedList();

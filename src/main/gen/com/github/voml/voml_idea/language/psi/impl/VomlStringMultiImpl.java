@@ -11,14 +11,14 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlStringInlineImpl extends ASTWrapperPsiElement implements VomlStringInline {
+public class VomlStringMultiImpl extends ASTWrapperPsiElement implements VomlStringMulti {
 
-  public VomlStringInlineImpl(@NotNull ASTNode node) {
+  public VomlStringMultiImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitStringInline(this);
+    visitor.visitStringMulti(this);
   }
 
   @Override

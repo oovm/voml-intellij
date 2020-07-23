@@ -48,6 +48,28 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // "---"
+  public static boolean back_top(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "back_top")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, BACK_TOP, "<back top>");
+    r = consumeToken(b, "---");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // escaped | NON_ESCAPE
+  static boolean char_$(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "char_$")) return false;
+    if (!nextTokenIs(b, "", ESCAPE, NON_ESCAPE)) return false;
+    boolean r;
+    r = escaped(b, l + 1);
+    if (!r) r = consumeToken(b, NON_ESCAPE);
+    return r;
+  }
+
+  /* ********************************************************** */
   // EQ | COLON
   static boolean eq(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eq")) return false;
@@ -59,16 +81,40 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // ESCAPE (ESCAPE|NON_ESCAPE)
+  public static boolean escaped(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "escaped")) return false;
+    if (!nextTokenIs(b, ESCAPE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ESCAPE);
+    r = r && escaped_1(b, l + 1);
+    exit_section_(b, m, ESCAPED, r);
+    return r;
+  }
+
+  // ESCAPE|NON_ESCAPE
+  private static boolean escaped_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "escaped_1")) return false;
+    boolean r;
+    r = consumeToken(b, ESCAPE);
+    if (!r) r = consumeToken(b, NON_ESCAPE);
+    return r;
+  }
+
+  /* ********************************************************** */
   // scope
-  // 	| insert_pair
-  // 	| insert_item
-  // 	| import_statement
-  // 	| SEMICOLON
+  //     | back_top
+  //     | insert_pair
+  //     | insert_item
+  //     | import_statement
+  //     | SEMICOLON
   public static boolean expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EXPRESSION, "<expression>");
     r = scope(b, l + 1);
+    if (!r) r = back_top(b, l + 1);
     if (!r) r = insert_pair(b, l + 1);
     if (!r) r = insert_item(b, l + 1);
     if (!r) r = import_statement(b, l + 1);
@@ -365,20 +411,35 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ACCENT | ANGLE_L | ANGLE_R
+  // ACCENT | ANGLE_L+ | ANGLE_R
   public static boolean scope_mark(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scope_mark")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SCOPE_MARK, "<scope mark>");
     r = consumeToken(b, ACCENT);
-    if (!r) r = consumeToken(b, ANGLE_L);
+    if (!r) r = scope_mark_1(b, l + 1);
     if (!r) r = consumeToken(b, ANGLE_R);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // ANGLE_L+
+  private static boolean scope_mark_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_mark_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ANGLE_L);
+    while (r) {
+      int c = current_position_(b);
+      if (!consumeToken(b, ANGLE_L)) break;
+      if (!empty_element_parsed_guard_(b, "scope_mark_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   /* ********************************************************** */
-  // [string_prefix] (string_inline)
+  // [string_prefix] (string_inline|string_multi)
   static boolean str(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "str")) return false;
     if (!nextTokenIs(b, "", IDENT, QUOTATION)) return false;
@@ -397,26 +458,63 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (string_inline)
+  // string_inline|string_multi
   private static boolean str_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "str_1")) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = string_inline(b, l + 1);
-    exit_section_(b, m, null, r);
+    if (!r) r = string_multi(b, l + 1);
     return r;
   }
 
   /* ********************************************************** */
-  // QUOTATION IDENT QUOTATION
+  // QUOTATION char* QUOTATION
   public static boolean string_inline(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string_inline")) return false;
     if (!nextTokenIs(b, QUOTATION)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, QUOTATION, IDENT, QUOTATION);
+    r = consumeToken(b, QUOTATION);
+    r = r && string_inline_1(b, l + 1);
+    r = r && consumeToken(b, QUOTATION);
     exit_section_(b, m, STRING_INLINE, r);
     return r;
+  }
+
+  // char*
+  private static boolean string_inline_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_inline_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!char_$(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "string_inline_1", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // QUOTATION char* QUOTATION
+  public static boolean string_multi(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_multi")) return false;
+    if (!nextTokenIs(b, QUOTATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, QUOTATION);
+    r = r && string_multi_1(b, l + 1);
+    r = r && consumeToken(b, QUOTATION);
+    exit_section_(b, m, STRING_MULTI, r);
+    return r;
+  }
+
+  // char*
+  private static boolean string_multi_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_multi_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!char_$(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "string_multi_1", c)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */

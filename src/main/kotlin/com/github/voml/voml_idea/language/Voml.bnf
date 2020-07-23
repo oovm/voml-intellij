@@ -16,62 +16,64 @@
     psiImplUtilClass = "com.github.voml.voml_idea.language.psi.impl.VomlPsiImplUtil"
 
     tokens = [
-        COMMENT = "regexp://[^\r\n]*"
-        BLOCK_COMMENT = "regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]"
-        NULL = "null"
-        IMPORT = "@import"
+        COMMENT = 'regexp://[^\r\n]*'
+        BLOCK_COMMENT = 'regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]'
+        NULL = 'null'
+        IMPORT = '@import'
 
-        BOOLEAN = "regexp:true|false"
+        BOOLEAN = 'regexp:true|false'
 
-        IDENT = "regexp:[A-Za-z_][A-Za-z0-9_]*"
+        IDENT = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
 
-        BYTE ="regexp:(0[bBoOxX][0-9A-Fa-f][0-9A-Fa-f_]*)"
-        INTEGER = "regexp:(0|[1-9][0-9_]*)"
-        FLOAT = "regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)"
-        SIGN = "regexp:[+-]"
+        BYTE = 'regexp:(0[bBoOxX][0-9A-Fa-f][0-9A-Fa-f_]*)'
+        INTEGER = 'regexp:(0|[1-9][0-9_]*)'
+        FLOAT = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
+        SIGN = 'regexp:[+-]'
 
-        PARENTHESIS_L = "("
-        PARENTHESIS_R = ")"
-        BRACKET_L = "["
-        BRACKET_R = "]"
-        BRACE_L = "{"
-        BRACE_R = "}"
-        ACCENT = "^"
-        ANGLE_L = "<"
-        ANGLE_R = ">"
-        QUOTATION = "\""
-        EQ = "="
+        PARENTHESIS_L = '('
+        PARENTHESIS_R = ')'
+        BRACKET_L = '['
+        BRACKET_R = ']'
+        BRACE_L = '{'
+        BRACE_R = '}'
+        ACCENT = '^'
+        ANGLE_L = '<'
+        ANGLE_R = '>'
+        QUOTATION = '"'
+        ESCAPE = '\'
+        NON_ESCAPE = 'regexp:[^\\]'
+        EQ = '='
         NAN = "nan"
-        COLON = ":"
-        SEMICOLON = ";"
-        COMMA = ","
-        CITE = "$"
-        DOT = "."
-        STAR = "*"
-        SPACE='regexp:\s+'
+        COLON = ':'
+        SEMICOLON = ';'
+        COMMA = ','
+        CITE = '$'
+        DOT = '.'
+        STAR = '*'
+//      SPACE='regexp:\s+'
+//      ANY = 'regexp:.'
     ]
 }
 
 Voml ::= expression*;
 
 expression ::= scope
-	| insert_pair
-	| insert_item
-	| import_statement
-	| SEMICOLON;
+    | back_top
+    | insert_pair
+    | insert_item
+    | import_statement
+    | SEMICOLON;
 // ------------------------------------
 import_statement ::= IMPORT BRACE_L symbol_path BRACE_R;
 symbol_path ::= key_like (DOT key_like)*;
-
-
 private key_like ::= str | IDENT | INTEGER;
 key_path ::= [DOT*] symbol_path;
-
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
 private scope_inner ::= [scope_mark] key_path;
-scope_mark ::= ACCENT | ANGLE_L | ANGLE_R;
-
+scope_mark ::= ACCENT | ANGLE_L+ | ANGLE_R;
+back_top ::= "---";
+// ------------------------------------
 pair ::= symbol_path eq value;
 private eq ::= EQ | COLON;
 insert_pair ::= [DOT] pair;
@@ -83,11 +85,13 @@ string_prefix ::= IDENT;
 number_suffix ::= IDENT;
 // ------------------------------------
 private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
-
-string_inline ::= QUOTATION IDENT QUOTATION;
-
-private str ::= [string_prefix] (string_inline);
 private other_num ::= NAN;
+// ------------------------------------
+private str ::= [string_prefix] (string_inline|string_multi);
+string_inline ::= QUOTATION char* QUOTATION;
+string_multi ::= QUOTATION char* QUOTATION;
+private char ::= escaped | NON_ESCAPE;
+escaped ::= ESCAPE (ESCAPE|NON_ESCAPE);
 // ------------------------------------
 ref ::= CITE symbol_path;
 // ------------------------------------

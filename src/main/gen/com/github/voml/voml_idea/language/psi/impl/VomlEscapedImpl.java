@@ -11,14 +11,14 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlStringInlineImpl extends ASTWrapperPsiElement implements VomlStringInline {
+public class VomlEscapedImpl extends ASTWrapperPsiElement implements VomlEscaped {
 
-  public VomlStringInlineImpl(@NotNull ASTNode node) {
+  public VomlEscapedImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitStringInline(this);
+    visitor.visitEscaped(this);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class VomlStringInlineImpl extends ASTWrapperPsiElement implements VomlSt
   }
 
   @Override
-  @NotNull
-  public List<VomlEscaped> getEscapedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlEscaped.class);
+  @Nullable
+  public PsiElement getNonEscape() {
+    return findChildByType(NON_ESCAPE);
   }
 
 }
