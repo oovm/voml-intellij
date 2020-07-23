@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface VomlStringPrefix extends PsiElement {
 
   @NotNull
-  PsiElement getIdent();
+  PsiElement getSymbol();
 
 }

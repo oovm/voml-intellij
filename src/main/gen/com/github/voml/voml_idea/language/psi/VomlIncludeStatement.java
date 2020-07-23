@@ -5,12 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VomlTable extends PsiElement {
+public interface VomlIncludeStatement extends PsiElement {
 
   @NotNull
   VomlPaired getPaired();
 
+  @NotNull
+  VomlStringInline getStringInline();
+
   @Nullable
-  VomlTypeHint getTypeHint();
+  VomlStringPrefix getStringPrefix();
+
+  @NotNull
+  PsiElement getSymbol();
 
 }

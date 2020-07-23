@@ -105,9 +105,10 @@ public class VomlParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // scope
   //     | back_top
+  //     | include_statement
+  //     | inherit_statement
   //     | insert_pair
   //     | insert_item
-  //     | import_statement
   //     | SEMICOLON
   public static boolean expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression")) return false;
@@ -115,26 +116,100 @@ public class VomlParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, EXPRESSION, "<expression>");
     r = scope(b, l + 1);
     if (!r) r = back_top(b, l + 1);
+    if (!r) r = include_statement(b, l + 1);
+    if (!r) r = inherit_statement(b, l + 1);
     if (!r) r = insert_pair(b, l + 1);
     if (!r) r = insert_item(b, l + 1);
-    if (!r) r = import_statement(b, l + 1);
     if (!r) r = consumeToken(b, SEMICOLON);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // IMPORT BRACE_L symbol_path BRACE_R
-  public static boolean import_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_statement")) return false;
-    if (!nextTokenIs(b, IMPORT)) return false;
+  // SYMBOL*
+  static boolean include_inner(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "include_inner")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, SYMBOL)) break;
+      if (!empty_element_parsed_guard_(b, "include_inner", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // INCLUDE [string_prefix] string_inline (AS SYMBOL <<paired include_inner>>)
+  public static boolean include_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "include_statement")) return false;
+    if (!nextTokenIs(b, INCLUDE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IMPORT, BRACE_L);
-    r = r && symbol_path(b, l + 1);
-    r = r && consumeToken(b, BRACE_R);
-    exit_section_(b, m, IMPORT_STATEMENT, r);
+    r = consumeToken(b, INCLUDE);
+    r = r && include_statement_1(b, l + 1);
+    r = r && string_inline(b, l + 1);
+    r = r && include_statement_3(b, l + 1);
+    exit_section_(b, m, INCLUDE_STATEMENT, r);
     return r;
+  }
+
+  // [string_prefix]
+  private static boolean include_statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "include_statement_1")) return false;
+    string_prefix(b, l + 1);
+    return true;
+  }
+
+  // AS SYMBOL <<paired include_inner>>
+  private static boolean include_statement_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "include_statement_3")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, AS, SYMBOL);
+    r = r && paired(b, l + 1, VomlParser::include_inner);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INHERIT (SYMBOL | [string_prefix] string_inline)
+  public static boolean inherit_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inherit_statement")) return false;
+    if (!nextTokenIs(b, INHERIT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INHERIT);
+    r = r && inherit_statement_1(b, l + 1);
+    exit_section_(b, m, INHERIT_STATEMENT, r);
+    return r;
+  }
+
+  // SYMBOL | [string_prefix] string_inline
+  private static boolean inherit_statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inherit_statement_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SYMBOL);
+    if (!r) r = inherit_statement_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // [string_prefix] string_inline
+  private static boolean inherit_statement_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inherit_statement_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = inherit_statement_1_1_0(b, l + 1);
+    r = r && string_inline(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // [string_prefix]
+  private static boolean inherit_statement_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inherit_statement_1_1_0")) return false;
+    string_prefix(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -179,12 +254,12 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // str | IDENT | INTEGER
+  // str | SYMBOL | INTEGER
   static boolean key_like(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "key_like")) return false;
     boolean r;
     r = str(b, l + 1);
-    if (!r) r = consumeToken(b, IDENT);
+    if (!r) r = consumeToken(b, SYMBOL);
     if (!r) r = consumeToken(b, INTEGER);
     return r;
   }
@@ -286,13 +361,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT
+  // SYMBOL
   public static boolean number_suffix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "number_suffix")) return false;
-    if (!nextTokenIs(b, IDENT)) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENT);
+    r = consumeToken(b, SYMBOL);
     exit_section_(b, m, NUMBER_SUFFIX, r);
     return r;
   }
@@ -442,7 +517,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
   // [string_prefix] (string_inline|string_multi)
   static boolean str(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "str")) return false;
-    if (!nextTokenIs(b, "", IDENT, QUOTATION)) return false;
+    if (!nextTokenIs(b, "", QUOTATION, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = str_0(b, l + 1);
@@ -518,13 +593,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT
+  // SYMBOL
   public static boolean string_prefix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string_prefix")) return false;
-    if (!nextTokenIs(b, IDENT)) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENT);
+    r = consumeToken(b, SYMBOL);
     exit_section_(b, m, STRING_PREFIX, r);
     return r;
   }
@@ -642,13 +717,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT
+  // SYMBOL
   public static boolean type_hint(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type_hint")) return false;
-    if (!nextTokenIs(b, IDENT)) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENT);
+    r = consumeToken(b, SYMBOL);
     exit_section_(b, m, TYPE_HINT, r);
     return r;
   }

@@ -29,8 +29,8 @@ public class VomlStringPrefixImpl extends ASTWrapperPsiElement implements VomlSt
 
   @Override
   @NotNull
-  public PsiElement getIdent() {
-    return findNotNullChildByType(IDENT);
+  public PsiElement getSymbol() {
+    return findNotNullChildByType(SYMBOL);
   }
 
 }

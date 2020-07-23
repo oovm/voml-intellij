@@ -1,7 +1,8 @@
+@inherit user;
 
-@import json "a" as a
+@include json "a" as a
 
-@import json "a" {
+@include json "a" {
 
 }
 

@@ -11,20 +11,44 @@ import static com.github.voml.voml_idea.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_idea.language.psi.*;
 
-public class VomlScopeMarkImpl extends ASTWrapperPsiElement implements VomlScopeMark {
+public class VomlIncludeStatementImpl extends ASTWrapperPsiElement implements VomlIncludeStatement {
 
-  public VomlScopeMarkImpl(@NotNull ASTNode node) {
+  public VomlIncludeStatementImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitScopeMark(this);
+    visitor.visitIncludeStatement(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof VomlVisitor) accept((VomlVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public VomlPaired getPaired() {
+    return findNotNullChildByClass(VomlPaired.class);
+  }
+
+  @Override
+  @NotNull
+  public VomlStringInline getStringInline() {
+    return findNotNullChildByClass(VomlStringInline.class);
+  }
+
+  @Override
+  @Nullable
+  public VomlStringPrefix getStringPrefix() {
+    return findChildByClass(VomlStringPrefix.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getSymbol() {
+    return findNotNullChildByType(SYMBOL);
   }
 
 }

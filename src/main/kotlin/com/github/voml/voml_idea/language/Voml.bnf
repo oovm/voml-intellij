@@ -19,12 +19,14 @@
         COMMENT = 'regexp://[^\r\n]*'
         BLOCK_COMMENT = 'regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]'
         NULL = 'null'
-        IMPORT = '@import'
+        INCLUDE = '@include'
+        INHERIT = '@inherit'
+        AS = "as"
 
         BOOLEAN = 'regexp:true|false'
 
-        IDENT = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
-
+        SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
+		STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\\'|\\)*\")"
         BYTE = 'regexp:(0[bBoOxX][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
         FLOAT = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
@@ -59,14 +61,18 @@ Voml ::= expression*;
 
 expression ::= scope
     | back_top
+    | include_statement
+    | inherit_statement
     | insert_pair
     | insert_item
-    | import_statement
     | SEMICOLON;
 // ------------------------------------
-import_statement ::= IMPORT BRACE_L symbol_path BRACE_R;
+inherit_statement ::= INHERIT (SYMBOL | [string_prefix] string_inline);
+// -------------------------------G-----
+include_statement ::= INCLUDE [string_prefix] string_inline (AS SYMBOL <<paired include_inner>>);
+private include_inner ::= SYMBOL*;
 symbol_path ::= key_like (DOT key_like)*;
-private key_like ::= str | IDENT | INTEGER;
+private key_like ::= str | SYMBOL | INTEGER;
 key_path ::= [DOT*] symbol_path;
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
@@ -80,9 +86,9 @@ insert_pair ::= [DOT] pair;
 insert_item ::= (DOT|STAR) value;
 // ------------------------------------
 value ::= NULL | BOOLEAN | num | ref | str | table;
-type_hint ::= IDENT;
-string_prefix ::= IDENT;
-number_suffix ::= IDENT;
+type_hint ::= SYMBOL;
+string_prefix ::= SYMBOL;
+number_suffix ::= SYMBOL;
 // ------------------------------------
 private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
 private other_num ::= NAN;

@@ -14,7 +14,7 @@ import java.util.function.Supplier
 // TODO: 分类
 enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, default: TextAttributesKey? = null) {
     // 特殊关键词
-    IMPORT(VomlBundle.messagePointer("color.settings.toml.import"), Default.KEYWORD),
+    KEYWORD(VomlBundle.messagePointer("color.settings.toml.keyword"), Default.KEYWORD),
     // 字面量
     NULL(VomlBundle.messagePointer("color.settings.toml.null"), Default.KEYWORD),
     BOOLEAN(VomlBundle.messagePointer("color.settings.toml.boolean"), Default.KEYWORD),
