@@ -33,24 +33,24 @@ jobs:
         id: properties
         shell: bash
         run: |
-          ChangeLog="$(cat << 'EOM' | sed -e 's/^[[:space:]]*$//g' -e '/./,$!d'
+          CHANGELOG="$(cat << 'EOM' | sed -e 's/^[[:space:]]*$//g' -e '/./,$!d'
           ${{ github.event.release.body }}
           EOM
           )"
           
-          ChangeLog="${ChangeLog//'%'/'%25'}"
-          ChangeLog="${ChangeLog//$'\n'/'%0A'}"
-          ChangeLog="${ChangeLog//$'\r'/'%0D'}"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 
-          echo "::set-output name=changelog::$ChangeLog"
+          echo "::set-output name=changelog::$CHANGELOG"
 
       # Update Unreleased section with the current release note
       - name: Patch Changelog
         if: ${{ steps.properties.outputs.changelog != '' }}
         env:
-          ChangeLog: ${{ steps.properties.outputs.changelog }}
+          CHANGELOG: ${{ steps.properties.outputs.changelog }}
         run: |
-          ./gradlew patchChangelog --release-note="$ChangeLog"
+          ./gradlew patchChangelog --release-note="$CHANGELOG"
 
       # Publish the plugin to the Marketplace
       - name: Publish Plugin
@@ -82,6 +82,6 @@ jobs:
 
           gh pr create \
             --title "Changelog update - \`$VERSION\`" \
-            --body "Current pull request contains patched \`ChangeLog.md\` file for the \`$VERSION\` version." \
+            --body "Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version." \
             --base main \
             --head $BRANCH

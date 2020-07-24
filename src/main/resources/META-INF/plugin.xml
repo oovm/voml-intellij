@@ -1,18 +1,97 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.oovm.vomlintellij</id>
-    <name>voml-intellij</name>
-    <vendor>oovm</vendor>
+    <id>com.github.voml.voml_idea</id>
+    <name>Voml Extended Support</name>
+    <vendor>voml</vendor>
 
+    <description><![CDATA[
+    Plugin adds support for VOML
+    Plugin adds support for VOML
+    Plugin adds support for VOML
+    ]]></description>
+
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-
+<!--    <depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
+    <resource-bundle>messages.VomlBundle</resource-bundle>
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.oovm.vomlintellij.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.oovm.vomlintellij.services.MyProjectService"/>
+        <fileType
+                name="Voml file"
+                implementationClass="com.github.voml.voml_idea.language.VomlFileType"
+                fieldName="INSTANCE"
+                language="Voml"
+                extensions="Voml"
+        />
+        <lang.parserDefinition
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.language.VomlParserDefinition"
+        />
+        <lang.syntaxHighlighter
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.VomlSyntaxHighlighter"
+        />
+        <colorSettingsPage
+                implementation="com.github.voml.voml_idea.ide.colors.VomlColorSettingsPage"
+        />
+        <lang.commenter
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.VomlCommenter"
+        />
+        <lang.braceMatcher
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.braces.VomlBraceMatcher"
+        />
+        <lang.quoteHandler
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.VomlQuoteHandler"
+        />
+        <lang.foldingBuilder
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.folding.VomlFoldingBuilder"
+        />
+        <indexPatternBuilder
+                implementation="com.github.voml.voml_idea.ide.todo.VomlTodoIndexPatternBuilder"
+        />
+        <todoIndexer
+                filetype="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.todo.VomlTodoIndexer"
+        />
+        <completion.contributor
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.completion.VomlOptionCompletionContributor"
+        />
+        <annotator
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.annotator.VomlHighlightingAnnotator"
+        />
+        <annotator
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.annotator.checkers.VomlObjectCheckerAnnotator"
+        />
+        <annotator
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.annotator.checkers.VomlTableCheckerAnnotator"
+        />
+        <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
+        <additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.github.voml.voml_idea.ide.codestyle.VomlLanguageCodeStyleSettingsProvider"
+        />
+        <lang.formatter
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.formatter.VomlFormattingModelBuilder"
+        />
+        <lang.smartEnterProcessor
+                language="Voml"
+                implementationClass="com.github.voml.voml_idea.ide.assist.fixers.VomlSmartEnterProcessor"
+        />
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.oovm.vomlintellij.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="com.github.voml.voml_idea.ide.actions.VomlCreateFile"
+                class="com.github.voml.voml_idea.ide.actions.VomlCreateFile"
+                text="Voml File"
+                description="Create new Voml file">
+            <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
+        </action>
+    </actions>
 </idea-plugin>
