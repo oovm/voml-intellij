@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.github.voml.voml_idea</id>
+    <id>com.github.voml.voml_intellij</id>
     <name>Voml Extended Support</name>
     <vendor>voml</vendor>
 
@@ -17,78 +17,78 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType
                 name="Voml file"
-                implementationClass="com.github.voml.voml_idea.language.VomlFileType"
+                implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
                 fieldName="INSTANCE"
                 language="Voml"
                 extensions="Voml"
         />
         <lang.parserDefinition
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.language.VomlParserDefinition"
+                implementationClass="com.github.voml.voml_intellij.language.VomlParserDefinition"
         />
         <lang.syntaxHighlighter
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.VomlSyntaxHighlighter"
+                implementationClass="com.github.voml.voml_intellij.ide.VomlSyntaxHighlighter"
         />
         <colorSettingsPage
-                implementation="com.github.voml.voml_idea.ide.colors.VomlColorSettingsPage"
+                implementation="com.github.voml.voml_intellij.ide.colors.VomlColorSettingsPage"
         />
         <lang.commenter
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.VomlCommenter"
+                implementationClass="com.github.voml.voml_intellij.ide.VomlCommenter"
         />
         <lang.braceMatcher
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.braces.VomlBraceMatcher"
+                implementationClass="com.github.voml.voml_intellij.ide.braces.VomlBraceMatcher"
         />
         <lang.quoteHandler
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.VomlQuoteHandler"
+                implementationClass="com.github.voml.voml_intellij.ide.VomlQuoteHandler"
         />
         <lang.foldingBuilder
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.folding.VomlFoldingBuilder"
+                implementationClass="com.github.voml.voml_intellij.ide.folding.VomlFoldingBuilder"
         />
         <indexPatternBuilder
-                implementation="com.github.voml.voml_idea.ide.todo.VomlTodoIndexPatternBuilder"
+                implementation="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexPatternBuilder"
         />
         <todoIndexer
                 filetype="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.todo.VomlTodoIndexer"
+                implementationClass="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexer"
         />
         <completion.contributor
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.completion.VomlOptionCompletionContributor"
+                implementationClass="com.github.voml.voml_intellij.ide.completion.VomlOptionCompletionContributor"
         />
         <annotator
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.annotator.VomlHighlightingAnnotator"
+                implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlHighlightingAnnotator"
         />
         <annotator
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.annotator.checkers.VomlObjectCheckerAnnotator"
+                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlObjectCheckerAnnotator"
         />
         <annotator
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.annotator.checkers.VomlTableCheckerAnnotator"
+                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlTableCheckerAnnotator"
         />
         <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
         <langCodeStyleSettingsProvider
-                implementation="com.github.voml.voml_idea.ide.codestyle.VomlLanguageCodeStyleSettingsProvider"
+                implementation="com.github.voml.voml_intellij.ide.codestyle.VomlLanguageCodeStyleSettingsProvider"
         />
         <lang.formatter
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.formatter.VomlFormattingModelBuilder"
+                implementationClass="com.github.voml.voml_intellij.ide.formatter.VomlFormattingModelBuilder"
         />
         <lang.smartEnterProcessor
                 language="Voml"
-                implementationClass="com.github.voml.voml_idea.ide.assist.fixers.VomlSmartEnterProcessor"
+                implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
         />
     </extensions>
     <actions>
-        <action id="com.github.voml.voml_idea.ide.actions.VomlCreateFile"
-                class="com.github.voml.voml_idea.ide.actions.VomlCreateFile"
+        <action id="com.github.voml.voml_intellij.ide.actions.VomlCreateFile"
+                class="com.github.voml.voml_intellij.ide.actions.VomlCreateFile"
                 text="Voml File"
                 description="Create new Voml file">
             <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
