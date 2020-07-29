@@ -1,6 +1,7 @@
 package com.github.voml.voml_intellij.language
 
 import com.github.voml.voml_intellij.language.parser.VomlParser
+import com.github.voml.voml_intellij.language.psi.VomlTypes
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -37,7 +38,7 @@ class VomlParserDefinition : ParserDefinition {
 
     companion object {
         val COMMENTS = TokenSet.create(VomlTypes.COMMENT, VomlTypes.BLOCK_COMMENT)
-        val STRING_LITERALS = TokenSet.create(VomlTypes.STRING_INLINE, VomlTypes.STRING_PREFIX)
+        val STRING_LITERALS = TokenSet.create(VomlTypes.STRING_INLINE, VomlTypes.STRING_PREFIX, VomlTypes.STRING_MULTI)
         val FILE = IFileElementType(VomlLanguage.INSTANCE)
     }
 }

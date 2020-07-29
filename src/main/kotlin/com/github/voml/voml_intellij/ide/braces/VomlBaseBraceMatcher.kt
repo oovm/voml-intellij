@@ -1,5 +1,6 @@
 package com.github.voml.voml_intellij.ide.braces
 
+import com.github.voml.voml_intellij.language.psi.VomlTypes
 import com.github.voml.voml_intellij.language.psi.Voml_COMMENTS
 import com.github.voml.voml_intellij.language.psi.tokenSetOf
 import com.intellij.lang.BracePair

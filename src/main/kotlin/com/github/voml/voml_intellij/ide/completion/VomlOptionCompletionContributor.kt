@@ -1,5 +1,6 @@
 package com.github.voml.voml_intellij.ide.completion
 
+import com.github.voml.voml_intellij.language.psi.VomlTypes
 import com.intellij.codeInsight.completion.*
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.editor.EditorModificationUtil

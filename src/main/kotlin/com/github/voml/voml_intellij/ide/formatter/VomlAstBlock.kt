@@ -1,6 +1,7 @@
 package com.github.voml.voml_intellij.ide.formatter
 
 import com.github.voml.voml_intellij.language.VomlLanguage
+import com.github.voml.voml_intellij.language.psi.VomlTypes
 import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
