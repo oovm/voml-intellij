@@ -20,7 +20,7 @@ class VomlFileType private constructor() : LanguageFileType(VomlLanguage.INSTANC
 
     override fun getDescription(): String = VomlBundle.message("filetype.voml.description")
 
-    override fun getDefaultExtension(): String = "Voml"
+    override fun getDefaultExtension(): String = "voml"
 
     override fun getIcon(): Icon = VomlIcons.FILE
 
@@ -33,5 +33,5 @@ class VomlFileType private constructor() : LanguageFileType(VomlLanguage.INSTANC
 class VomlFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, VomlLanguage.INSTANCE) {
     override fun getFileType(): FileType = VomlFileType.INSTANCE
 
-    override fun toString(): String = "Voml File"
+    override fun toString(): String = VomlBundle.message("filetype.voml.create")
 }

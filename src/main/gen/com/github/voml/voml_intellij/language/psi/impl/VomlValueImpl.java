@@ -29,6 +29,12 @@ public class VomlValueImpl extends ASTWrapperPsiElement implements VomlValue {
 
   @Override
   @Nullable
+  public VomlAnnotation getAnnotation() {
+    return findChildByClass(VomlAnnotation.class);
+  }
+
+  @Override
+  @Nullable
   public VomlNumberSuffix getNumberSuffix() {
     return findChildByClass(VomlNumberSuffix.class);
   }

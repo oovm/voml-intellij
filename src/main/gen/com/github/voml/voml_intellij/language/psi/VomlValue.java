@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface VomlValue extends PsiElement {
 
   @Nullable
+  VomlAnnotation getAnnotation();
+
+  @Nullable
   VomlNumberSuffix getNumberSuffix();
 
   @Nullable

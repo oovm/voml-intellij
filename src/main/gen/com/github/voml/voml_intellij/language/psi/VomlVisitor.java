@@ -7,6 +7,14 @@ import com.intellij.psi.PsiElement;
 
 public class VomlVisitor extends PsiElementVisitor {
 
+  public void visitAnnotation(@NotNull VomlAnnotation o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAnnotationMark(@NotNull VomlAnnotationMark o) {
+    visitPsiElement(o);
+  }
+
   public void visitBackTop(@NotNull VomlBackTop o) {
     visitPsiElement(o);
   }

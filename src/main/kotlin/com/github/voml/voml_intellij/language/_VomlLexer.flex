@@ -1,5 +1,6 @@
 package com.github.voml.voml_intellij.language;
 
+import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
@@ -62,6 +63,7 @@ NON_ESCAPE=[^\\]
   "$"                  { return CITE; }
   "."                  { return DOT; }
   "*"                  { return STAR; }
+  "@"                  { return AT; }
   "DECIMAL"            { return DECIMAL; }
 
   {COMMENT}            { return COMMENT; }

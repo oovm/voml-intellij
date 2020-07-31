@@ -29,6 +29,12 @@ public class VomlExpressionImpl extends ASTWrapperPsiElement implements VomlExpr
 
   @Override
   @Nullable
+  public VomlAnnotation getAnnotation() {
+    return findChildByClass(VomlAnnotation.class);
+  }
+
+  @Override
+  @Nullable
   public VomlBackTop getBackTop() {
     return findChildByClass(VomlBackTop.class);
   }

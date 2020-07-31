@@ -21,7 +21,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
     private fun getTokenColor(tokenType: IElementType): VomlColor? {
         return when (tokenType) {
             //
-            VomlTypes.INCLUDE, VomlTypes.INHERIT -> VomlColor.KEYWORD
+            VomlTypes.INCLUDE, VomlTypes.INHERIT, VomlTypes.AS -> VomlColor.KEYWORD
             VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
             VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
@@ -29,7 +29,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
             VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS
             VomlTypes.BRACE_L, VomlTypes.BRACE_R -> VomlColor.BRACES
-            VomlTypes.COLON, VomlTypes.EQ -> VomlColor.COLON
+            VomlTypes.COLON, VomlTypes.EQ -> VomlColor.SET
             VomlTypes.COMMA -> VomlColor.COMMA
             // atom
             VomlTypes.NULL -> VomlColor.NULL

@@ -52,6 +52,7 @@
         CITE = '$'
         DOT = '.'
         STAR = '*'
+        AT = '@'
 //      SPACE='regexp:\s+'
 //      ANY = 'regexp:.'
     ]
@@ -65,6 +66,7 @@ expression ::= scope
     | inherit_statement
     | insert_pair
     | insert_item
+    | annotation
     | SEMICOLON;
 // ------------------------------------
 inherit_statement ::= INHERIT (SYMBOL | [string_prefix] string_inline);
@@ -85,7 +87,7 @@ private eq ::= EQ | COLON;
 insert_pair ::= [DOT] pair;
 insert_item ::= (DOT|STAR) value;
 // ------------------------------------
-value ::= NULL | BOOLEAN | num | ref | str | table;
+value ::= NULL | BOOLEAN | num | ref | str | table | annotation;
 type_hint ::= SYMBOL;
 string_prefix ::= SYMBOL;
 number_suffix ::= SYMBOL;
@@ -100,6 +102,9 @@ private char ::= escaped | NON_ESCAPE;
 escaped ::= ESCAPE (ESCAPE|NON_ESCAPE);
 // ------------------------------------
 ref ::= CITE symbol_path;
+// ------------------------------------
+annotation ::= annotation_mark <<paired table_inner>>;
+annotation_mark ::= AT SYMBOL;
 // ------------------------------------
 table ::= [type_hint] <<paired table_inner>>;
 private table_inner ::= [table_item (COMMA table_item)* [COMMA]];

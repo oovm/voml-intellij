@@ -27,35 +27,61 @@ class VomlColorSettingsPage : ColorSettingsPage {
     override fun getHighlighter() = VomlSyntaxHighlighter()
 
     override fun getDemoText() =
-"""<extension>#![enable(</extension>extension<extension>)]</extension>
-// Line comment
-<object_name>MyConfig</object_name> ( // End of line comment
-    <key>simple_tuple</key>: (1, 2.0, 1.0e9, true, false),
-    <key>anonymous_struct</key>: (
-        <key>raw_string</key>: r#"Raw string containing "anything" you want"#,
-        <key>also_raw_string</key>: r##"Also raw string containing "anything" you want"##,
-        <key>name</key>: "John",
-        <key>surname</key>: "Doe",
-    ),
-    <key>normal_struct</key>: <object_name>NormalStruct</object_name> (
-        <key>foo</key>: <object_name>Bar</object_name>(20)
-    ),
-    <key>enum</key>: <object_name>Enum</object_name>,
-    /*
-    Multiline comment
-    */
-    <key>dictionary</key>: {
-        0: <object_name>SomeStructWithOption</object_name>(None),
-        1: <object_name>SomeStructWithOption</object_name>(Some(42)),
-        "cat": "Meow",
-        "dog": "Bark",
-    },
-    <key>array</key>: [
-        (<key>owner</key>: None, <key>price</key>: 0, <key>name</key>: None),
-        (<key>owner</key>: Some("self"), <key>price</key>: 20, <key>name</key>: Some("name")),
-        (<key>owner</key>: Some("Jakob"), <key>price</key>: 20, <key>name</key>: Some("other_name")),
-    ]
-)"""
+"""<KEYWORD>@inherit</KEYWORD> user;
+
+@include json "some/path/test.json" as json;
+@include "https:example.org/test.voml" {
+	external_key as external
+}
+
+[literals]
+boolean = [<BOOLEAN>true</BOOLEAN>, <BOOLEAN>false</BOOLEAN>]
+
+[literals.number]
+integer  = <INTEGER>10</INTEGER>cm
+decimal  = <DECIMAL>0.1</DECIMAL>m
+string   = "string"
+escape   = "\n"
+
+[keywords]
+// remove this key-value pair
+key = null
+
+[scopes]
+	[>a1]
+	key1 = "scopes.b1.key1"
+	[^a2]  # {^.b2}
+	key2 = "scopes.b2.key2"
+		[>b1]
+		key3 = "a.a2.b1.key3"
+	[<]
+	key4 = "scopes.b1.key4"
+		[>b1]
+		key5 = "a.a2.b1.key5"
+	[<a2]  // same as [<][^a2]
+	key = "scopes.b1.key"
+
+--- # 返回顶级
+
+connection_max.a = 5cm
+v = [
+	@merge(override)
+	@merge_as_source(unset)
+	@merge_as_target(ignore)
+	a = Some(1)
+    b = None()
+]
+
+[name]
+  . a = 2
+  * a
+  * b
+
+
+// 标准键盘上不需要 shift 的符号
+// [];',./`-=
+// 小键盘上的符号
+// /*-+."""
 
     override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
 }

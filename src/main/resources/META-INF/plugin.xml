@@ -20,7 +20,7 @@
                 implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
                 fieldName="INSTANCE"
                 language="Voml"
-                extensions="Voml"
+                extensions="voml"
         />
         <lang.parserDefinition
                 language="Voml"

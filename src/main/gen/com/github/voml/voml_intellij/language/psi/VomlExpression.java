@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface VomlExpression extends PsiElement {
 
   @Nullable
+  VomlAnnotation getAnnotation();
+
+  @Nullable
   VomlBackTop getBackTop();
 
   @Nullable

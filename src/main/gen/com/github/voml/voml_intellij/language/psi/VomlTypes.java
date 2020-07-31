@@ -8,6 +8,8 @@ import com.github.voml.voml_intellij.language.psi.impl.*;
 
 public interface VomlTypes {
 
+  IElementType ANNOTATION = new VomlElementType("ANNOTATION");
+  IElementType ANNOTATION_MARK = new VomlElementType("ANNOTATION_MARK");
   IElementType BACK_TOP = new VomlElementType("BACK_TOP");
   IElementType ESCAPED = new VomlElementType("ESCAPED");
   IElementType EXPRESSION = new VomlElementType("EXPRESSION");
@@ -34,6 +36,7 @@ public interface VomlTypes {
   IElementType ANGLE_L = new VomlTokenType("<");
   IElementType ANGLE_R = new VomlTokenType(">");
   IElementType AS = new VomlTokenType("as");
+  IElementType AT = new VomlTokenType("@");
   IElementType BLOCK_COMMENT = new VomlTokenType("BLOCK_COMMENT");
   IElementType BOOLEAN = new VomlTokenType("BOOLEAN");
   IElementType BRACE_L = new VomlTokenType("{");
@@ -68,7 +71,13 @@ public interface VomlTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == BACK_TOP) {
+      if (type == ANNOTATION) {
+        return new VomlAnnotationImpl(node);
+      }
+      else if (type == ANNOTATION_MARK) {
+        return new VomlAnnotationMarkImpl(node);
+      }
+      else if (type == BACK_TOP) {
         return new VomlBackTopImpl(node);
       }
       else if (type == ESCAPED) {

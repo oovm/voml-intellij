@@ -48,6 +48,31 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // annotation_mark <<paired table_inner>>
+  public static boolean annotation(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "annotation")) return false;
+    if (!nextTokenIs(b, AT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = annotation_mark(b, l + 1);
+    r = r && paired(b, l + 1, VomlParser::table_inner);
+    exit_section_(b, m, ANNOTATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // AT SYMBOL
+  public static boolean annotation_mark(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "annotation_mark")) return false;
+    if (!nextTokenIs(b, AT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, AT, SYMBOL);
+    exit_section_(b, m, ANNOTATION_MARK, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // "---"
   public static boolean back_top(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "back_top")) return false;
@@ -109,6 +134,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
   //     | inherit_statement
   //     | insert_pair
   //     | insert_item
+  //     | annotation
   //     | SEMICOLON
   public static boolean expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression")) return false;
@@ -120,6 +146,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
     if (!r) r = inherit_statement(b, l + 1);
     if (!r) r = insert_pair(b, l + 1);
     if (!r) r = insert_item(b, l + 1);
+    if (!r) r = annotation(b, l + 1);
     if (!r) r = consumeToken(b, SEMICOLON);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -729,7 +756,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NULL | BOOLEAN | num | ref | str | table
+  // NULL | BOOLEAN | num | ref | str | table | annotation
   public static boolean value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value")) return false;
     boolean r;
@@ -740,6 +767,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
     if (!r) r = ref(b, l + 1);
     if (!r) r = str(b, l + 1);
     if (!r) r = table(b, l + 1);
+    if (!r) r = annotation(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
