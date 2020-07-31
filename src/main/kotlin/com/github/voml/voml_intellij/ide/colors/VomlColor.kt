@@ -26,7 +26,10 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     TYPE_HINT(VomlBundle.messagePointer("color.settings.toml.type_hint"), Default.IDENTIFIER),
     NUMBER_HINT(VomlBundle.messagePointer("color.settings.toml.number_hint"), Default.IDENTIFIER),
     STRING_HINT(VomlBundle.messagePointer("color.settings.toml.string_hint"), Default.IDENTIFIER),
-    KEY_NAME(VomlBundle.messagePointer("color.settings.toml.key_name"), Default.STATIC_FIELD),
+    KEY_SYMBOL(VomlBundle.messagePointer("color.settings.toml.key_name"), Default.STATIC_FIELD),
+    SCOPE_SYMBOL(VomlBundle.messagePointer("color.settings.toml.key_name"), Default.STATIC_FIELD),
+    SCOPE_MARK(VomlBundle.messagePointer("color.settings.toml.key_name"), KEYWORD.textAttributesKey),
+    ITEM_MARK(VomlBundle.messagePointer("color.settings.toml.key_name"), KEYWORD.textAttributesKey),
     // 标点符号
     PARENTHESES(OptionsBundle.messagePointer("options.language.defaults.parentheses"), Default.PARENTHESES),
     BRACKETS(OptionsBundle.messagePointer("options.language.defaults.brackets"), Default.BRACKETS),

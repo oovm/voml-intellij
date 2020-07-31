@@ -29,39 +29,39 @@ class VomlColorSettingsPage : ColorSettingsPage {
     override fun getDemoText() =
 """<KEYWORD>@inherit</KEYWORD> user;
 
-@include json "some/path/test.json" as json;
+@include <STRING_HINT>json</STRING_HINT> "some/path/test.json" <KEYWORD>as</KEYWORD> json;
 @include "https:example.org/test.voml" {
-	external_key as external
+	external_key <KEYWORD>as</KEYWORD> external
 }
 
-[literals]
-boolean = [<BOOLEAN>true</BOOLEAN>, <BOOLEAN>false</BOOLEAN>]
+[<SCOPE_SYMBOL>literals</SCOPE_SYMBOL>]
+<KEY_SYMBOL>boolean</KEY_SYMBOL> = [<BOOLEAN>true</BOOLEAN>, <BOOLEAN>false</BOOLEAN>]
 
-[literals.number]
-integer  = <INTEGER>10</INTEGER>cm
-decimal  = <DECIMAL>0.1</DECIMAL>m
-string   = "string"
-escape   = "\n"
+[<SCOPE_SYMBOL>literals</SCOPE_SYMBOL>.<SCOPE_SYMBOL>number</SCOPE_SYMBOL>]
+<KEY_SYMBOL>integer</KEY_SYMBOL>  = <INTEGER>10</INTEGER>cm
+<KEY_SYMBOL>decimal</KEY_SYMBOL>  = <DECIMAL>0.1</DECIMAL>m
+<KEY_SYMBOL>string</KEY_SYMBOL>   = "string"
+<KEY_SYMBOL>escape</KEY_SYMBOL>   = "\n"
 
-[keywords]
+[<SCOPE_SYMBOL>keywords</SCOPE_SYMBOL>]
 // remove this key-value pair
-key = null
+<KEY_SYMBOL>key</KEY_SYMBOL> = <NULL>null</NULL>
 
-[scopes]
-	[>a1]
+[<SCOPE_SYMBOL>scopes</SCOPE_SYMBOL>]
+	[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>a1</SCOPE_SYMBOL>]
 	key1 = "scopes.b1.key1"
-	[^a2]  # {^.b2}
+	[<SCOPE_MARK>^</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  # {^.b2}
 	key2 = "scopes.b2.key2"
-		[>b1]
+		[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>b1</SCOPE_SYMBOL>]
 		key3 = "a.a2.b1.key3"
-	[<]
+	[<SCOPE_MARK><</SCOPE_MARK>]
 	key4 = "scopes.b1.key4"
-		[>b1]
+		[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>b1</SCOPE_SYMBOL>]
 		key5 = "a.a2.b1.key5"
-	[<a2]  // same as [<][^a2]
+	[<SCOPE_MARK><</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  // same as [<][^a2]
 	key = "scopes.b1.key"
 
---- # 返回顶级
+<SCOPE_MARK>---</SCOPE_MARK> # Back2Top
 
 connection_max.a = 5cm
 v = [
@@ -73,9 +73,9 @@ v = [
 ]
 
 [name]
-  . a = 2
-  * a
-  * b
+  <ITEM_MARK>.</ITEM_MARK> a = 2
+  <ITEM_MARK>*</ITEM_MARK> a
+  <ITEM_MARK>*</ITEM_MARK> b
 
 
 // 标准键盘上不需要 shift 的符号

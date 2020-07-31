@@ -21,13 +21,15 @@
         NULL = 'null'
         INCLUDE = '@include'
         INHERIT = '@inherit'
+        IMPORT = '@import'
+        EXPORT = '@export'
         AS = "as"
 
         BOOLEAN = 'regexp:true|false'
 
         SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
 		STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\\'|\\)*\")"
-        BYTE = 'regexp:(0[bBoOxX][0-9A-Fa-f][0-9A-Fa-f_]*)'
+        BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
         FLOAT = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
         SIGN = 'regexp:[+-]'
@@ -64,10 +66,13 @@ expression ::= scope
     | back_top
     | include_statement
     | inherit_statement
+    | export_statement
     | insert_pair
     | insert_item
     | annotation
     | SEMICOLON;
+// ------------------------------------
+export_statement ::= EXPORT [string_prefix] string_inline;
 // ------------------------------------
 inherit_statement ::= INHERIT (SYMBOL | [string_prefix] string_inline);
 // -------------------------------G-----
