@@ -41,6 +41,12 @@ public class VomlExpressionImpl extends ASTWrapperPsiElement implements VomlExpr
 
   @Override
   @Nullable
+  public VomlExportStatement getExportStatement() {
+    return findChildByClass(VomlExportStatement.class);
+  }
+
+  @Override
+  @Nullable
   public VomlIncludeStatement getIncludeStatement() {
     return findChildByClass(VomlIncludeStatement.class);
   }

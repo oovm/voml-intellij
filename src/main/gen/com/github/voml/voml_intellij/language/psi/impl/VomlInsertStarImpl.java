@@ -11,32 +11,20 @@ import static com.github.voml.voml_intellij.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_intellij.language.psi.*;
 
-public class VomlInsertItemImpl extends ASTWrapperPsiElement implements VomlInsertItem {
+public class VomlInsertStarImpl extends ASTWrapperPsiElement implements VomlInsertStar {
 
-  public VomlInsertItemImpl(@NotNull ASTNode node) {
+  public VomlInsertStarImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitInsertItem(this);
+    visitor.visitInsertStar(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof VomlVisitor) accept((VomlVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public VomlInsertStar getInsertStar() {
-    return findNotNullChildByClass(VomlInsertStar.class);
-  }
-
-  @Override
-  @NotNull
-  public VomlValue getValue() {
-    return findNotNullChildByClass(VomlValue.class);
   }
 
 }

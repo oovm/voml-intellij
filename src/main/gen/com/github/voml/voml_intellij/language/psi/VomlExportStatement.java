@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VomlInsertPair extends PsiElement {
-
-  @Nullable
-  VomlInsertDot getInsertDot();
+public interface VomlExportStatement extends PsiElement {
 
   @NotNull
-  VomlPair getPair();
+  VomlStringInline getStringInline();
+
+  @Nullable
+  VomlStringPrefix getStringPrefix();
 
 }

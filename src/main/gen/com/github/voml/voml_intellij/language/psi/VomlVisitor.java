@@ -23,6 +23,10 @@ public class VomlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitExportStatement(@NotNull VomlExportStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpression(@NotNull VomlExpression o) {
     visitPsiElement(o);
   }
@@ -35,11 +39,19 @@ public class VomlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitInsertDot(@NotNull VomlInsertDot o) {
+    visitPsiElement(o);
+  }
+
   public void visitInsertItem(@NotNull VomlInsertItem o) {
     visitPsiElement(o);
   }
 
   public void visitInsertPair(@NotNull VomlInsertPair o) {
+    visitPsiElement(o);
+  }
+
+  public void visitInsertStar(@NotNull VomlInsertStar o) {
     visitPsiElement(o);
   }
 
@@ -68,6 +80,10 @@ public class VomlVisitor extends PsiElementVisitor {
   }
 
   public void visitScopeMark(@NotNull VomlScopeMark o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScopeSymbol(@NotNull VomlScopeSymbol o) {
     visitPsiElement(o);
   }
 

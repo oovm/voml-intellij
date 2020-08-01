@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface VomlInsertItem extends PsiElement {
 
   @NotNull
+  VomlInsertStar getInsertStar();
+
+  @NotNull
   VomlValue getValue();
 
 }

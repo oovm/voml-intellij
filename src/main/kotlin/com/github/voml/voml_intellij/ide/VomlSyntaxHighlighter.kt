@@ -25,6 +25,9 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
             VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
+            VomlTypes.ANNOTATION, VomlTypes.ANNOTATION_MARK -> VomlColor.ANNOTATION
+            VomlTypes.SCOPE_SYMBOL -> VomlColor.SCOPE_SYMBOL
+            VomlTypes.SCOPE_MARK -> VomlColor.SCOPE_MARK
             //
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
             VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS
@@ -34,12 +37,18 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             // atom
             VomlTypes.NULL -> VomlColor.NULL
             VomlTypes.BOOLEAN -> VomlColor.BOOLEAN
-            VomlTypes.INTEGER-> VomlColor.INTEGER
+
+            VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
+            VomlTypes.INTEGER -> VomlColor.INTEGER
             VomlTypes.DECIMAL -> VomlColor.DECIMAL
+
+            VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
             VomlTypes.STRING_INLINE -> VomlColor.STRING
+            VomlTypes.STRING_MULTI -> VomlColor.STRING
+
             VomlTypes.SYMBOL -> VomlColor.IDENTIFIER
             // 注释
-            VomlTypes.COMMENT-> VomlColor.LINE_COMMENT
+            VomlTypes.COMMENT -> VomlColor.LINE_COMMENT
             VomlTypes.BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
             // 错误
             TokenType.BAD_CHARACTER -> VomlColor.BAD_CHARACTER

@@ -12,11 +12,14 @@ public interface VomlTypes {
   IElementType ANNOTATION_MARK = new VomlElementType("ANNOTATION_MARK");
   IElementType BACK_TOP = new VomlElementType("BACK_TOP");
   IElementType ESCAPED = new VomlElementType("ESCAPED");
+  IElementType EXPORT_STATEMENT = new VomlElementType("EXPORT_STATEMENT");
   IElementType EXPRESSION = new VomlElementType("EXPRESSION");
   IElementType INCLUDE_STATEMENT = new VomlElementType("INCLUDE_STATEMENT");
   IElementType INHERIT_STATEMENT = new VomlElementType("INHERIT_STATEMENT");
+  IElementType INSERT_DOT = new VomlElementType("INSERT_DOT");
   IElementType INSERT_ITEM = new VomlElementType("INSERT_ITEM");
   IElementType INSERT_PAIR = new VomlElementType("INSERT_PAIR");
+  IElementType INSERT_STAR = new VomlElementType("INSERT_STAR");
   IElementType KEY_PATH = new VomlElementType("KEY_PATH");
   IElementType NUMBER_SUFFIX = new VomlElementType("NUMBER_SUFFIX");
   IElementType PAIR = new VomlElementType("PAIR");
@@ -24,6 +27,7 @@ public interface VomlTypes {
   IElementType REF = new VomlElementType("REF");
   IElementType SCOPE = new VomlElementType("SCOPE");
   IElementType SCOPE_MARK = new VomlElementType("SCOPE_MARK");
+  IElementType SCOPE_SYMBOL = new VomlElementType("SCOPE_SYMBOL");
   IElementType STRING_INLINE = new VomlElementType("STRING_INLINE");
   IElementType STRING_MULTI = new VomlElementType("STRING_MULTI");
   IElementType STRING_PREFIX = new VomlElementType("STRING_PREFIX");
@@ -52,7 +56,9 @@ public interface VomlTypes {
   IElementType DOT = new VomlTokenType(".");
   IElementType EQ = new VomlTokenType("=");
   IElementType ESCAPE = new VomlTokenType("\\");
+  IElementType EXPORT = new VomlTokenType("@export");
   IElementType FLOAT = new VomlTokenType("FLOAT");
+  IElementType IMPORT = new VomlTokenType("@import");
   IElementType INCLUDE = new VomlTokenType("@include");
   IElementType INHERIT = new VomlTokenType("@inherit");
   IElementType INTEGER = new VomlTokenType("INTEGER");
@@ -83,6 +89,9 @@ public interface VomlTypes {
       else if (type == ESCAPED) {
         return new VomlEscapedImpl(node);
       }
+      else if (type == EXPORT_STATEMENT) {
+        return new VomlExportStatementImpl(node);
+      }
       else if (type == EXPRESSION) {
         return new VomlExpressionImpl(node);
       }
@@ -92,11 +101,17 @@ public interface VomlTypes {
       else if (type == INHERIT_STATEMENT) {
         return new VomlInheritStatementImpl(node);
       }
+      else if (type == INSERT_DOT) {
+        return new VomlInsertDotImpl(node);
+      }
       else if (type == INSERT_ITEM) {
         return new VomlInsertItemImpl(node);
       }
       else if (type == INSERT_PAIR) {
         return new VomlInsertPairImpl(node);
+      }
+      else if (type == INSERT_STAR) {
+        return new VomlInsertStarImpl(node);
       }
       else if (type == KEY_PATH) {
         return new VomlKeyPathImpl(node);
@@ -118,6 +133,9 @@ public interface VomlTypes {
       }
       else if (type == SCOPE_MARK) {
         return new VomlScopeMarkImpl(node);
+      }
+      else if (type == SCOPE_SYMBOL) {
+        return new VomlScopeSymbolImpl(node);
       }
       else if (type == STRING_INLINE) {
         return new VomlStringInlineImpl(node);

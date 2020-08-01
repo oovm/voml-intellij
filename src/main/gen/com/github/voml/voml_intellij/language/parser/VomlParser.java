@@ -128,10 +128,32 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // EXPORT [string_prefix] string_inline
+  public static boolean export_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "export_statement")) return false;
+    if (!nextTokenIs(b, EXPORT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EXPORT);
+    r = r && export_statement_1(b, l + 1);
+    r = r && string_inline(b, l + 1);
+    exit_section_(b, m, EXPORT_STATEMENT, r);
+    return r;
+  }
+
+  // [string_prefix]
+  private static boolean export_statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "export_statement_1")) return false;
+    string_prefix(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // scope
   //     | back_top
   //     | include_statement
   //     | inherit_statement
+  //     | export_statement
   //     | insert_pair
   //     | insert_item
   //     | annotation
@@ -144,6 +166,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
     if (!r) r = back_top(b, l + 1);
     if (!r) r = include_statement(b, l + 1);
     if (!r) r = inherit_statement(b, l + 1);
+    if (!r) r = export_statement(b, l + 1);
     if (!r) r = insert_pair(b, l + 1);
     if (!r) r = insert_item(b, l + 1);
     if (!r) r = annotation(b, l + 1);
@@ -240,29 +263,32 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (DOT|STAR) value
-  public static boolean insert_item(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "insert_item")) return false;
-    if (!nextTokenIs(b, "<insert item>", DOT, STAR)) return false;
+  // DOT
+  public static boolean insert_dot(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "insert_dot")) return false;
+    if (!nextTokenIs(b, DOT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, INSERT_ITEM, "<insert item>");
-    r = insert_item_0(b, l + 1);
-    r = r && value(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // DOT|STAR
-  private static boolean insert_item_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "insert_item_0")) return false;
-    boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, DOT);
-    if (!r) r = consumeToken(b, STAR);
+    exit_section_(b, m, INSERT_DOT, r);
     return r;
   }
 
   /* ********************************************************** */
-  // [DOT] pair
+  // insert_star value
+  public static boolean insert_item(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "insert_item")) return false;
+    if (!nextTokenIs(b, STAR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = insert_star(b, l + 1);
+    r = r && value(b, l + 1);
+    exit_section_(b, m, INSERT_ITEM, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // [insert_dot] pair
   public static boolean insert_pair(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "insert_pair")) return false;
     boolean r;
@@ -273,11 +299,23 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [DOT]
+  // [insert_dot]
   private static boolean insert_pair_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "insert_pair_0")) return false;
-    consumeToken(b, DOT);
+    insert_dot(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // STAR
+  public static boolean insert_star(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "insert_star")) return false;
+    if (!nextTokenIs(b, STAR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STAR);
+    exit_section_(b, m, INSERT_STAR, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -494,13 +532,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [scope_mark] key_path
+  // [scope_mark] scope_path
   static boolean scope_inner(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scope_inner")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = scope_inner_0(b, l + 1);
-    r = r && key_path(b, l + 1);
+    r = r && scope_path(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -510,6 +548,17 @@ public class VomlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "scope_inner_0")) return false;
     scope_mark(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // str | scope_symbol | INTEGER
+  static boolean scope_key(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_key")) return false;
+    boolean r;
+    r = str(b, l + 1);
+    if (!r) r = scope_symbol(b, l + 1);
+    if (!r) r = consumeToken(b, INTEGER);
+    return r;
   }
 
   /* ********************************************************** */
@@ -537,6 +586,52 @@ public class VomlParser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(b, "scope_mark_1", c)) break;
     }
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // scope_key (DOT scope_key)*
+  static boolean scope_path(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_path")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = scope_key(b, l + 1);
+    r = r && scope_path_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (DOT scope_key)*
+  private static boolean scope_path_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_path_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!scope_path_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "scope_path_1", c)) break;
+    }
+    return true;
+  }
+
+  // DOT scope_key
+  private static boolean scope_path_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_path_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOT);
+    r = r && scope_key(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SYMBOL
+  public static boolean scope_symbol(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope_symbol")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SYMBOL);
+    exit_section_(b, m, SCOPE_SYMBOL, r);
     return r;
   }
 

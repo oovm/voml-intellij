@@ -28,6 +28,12 @@ public class VomlInsertPairImpl extends ASTWrapperPsiElement implements VomlInse
   }
 
   @Override
+  @Nullable
+  public VomlInsertDot getInsertDot() {
+    return findChildByClass(VomlInsertDot.class);
+  }
+
+  @Override
   @NotNull
   public VomlPair getPair() {
     return findNotNullChildByClass(VomlPair.class);

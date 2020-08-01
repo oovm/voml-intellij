@@ -83,14 +83,19 @@ private key_like ::= str | SYMBOL | INTEGER;
 key_path ::= [DOT*] symbol_path;
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
-private scope_inner ::= [scope_mark] key_path;
+private scope_inner ::= [scope_mark] scope_path;
+private scope_path  ::= scope_key (DOT scope_key)*
+private scope_key   ::= str | scope_symbol | INTEGER;
 scope_mark ::= ACCENT | ANGLE_L+ | ANGLE_R;
 back_top ::= "---";
+scope_symbol ::= SYMBOL;
 // ------------------------------------
 pair ::= symbol_path eq value;
 private eq ::= EQ | COLON;
-insert_pair ::= [DOT] pair;
-insert_item ::= (DOT|STAR) value;
+insert_pair ::= [insert_dot] pair;
+insert_item ::= insert_star value;
+insert_dot ::= DOT;
+insert_star ::= STAR;
 // ------------------------------------
 value ::= NULL | BOOLEAN | num | ref | str | table | annotation;
 type_hint ::= SYMBOL;

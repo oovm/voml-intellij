@@ -11,14 +11,14 @@ import static com.github.voml.voml_intellij.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_intellij.language.psi.*;
 
-public class VomlInsertItemImpl extends ASTWrapperPsiElement implements VomlInsertItem {
+public class VomlExportStatementImpl extends ASTWrapperPsiElement implements VomlExportStatement {
 
-  public VomlInsertItemImpl(@NotNull ASTNode node) {
+  public VomlExportStatementImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitInsertItem(this);
+    visitor.visitExportStatement(this);
   }
 
   @Override
@@ -29,14 +29,14 @@ public class VomlInsertItemImpl extends ASTWrapperPsiElement implements VomlInse
 
   @Override
   @NotNull
-  public VomlInsertStar getInsertStar() {
-    return findNotNullChildByClass(VomlInsertStar.class);
+  public VomlStringInline getStringInline() {
+    return findNotNullChildByClass(VomlStringInline.class);
   }
 
   @Override
-  @NotNull
-  public VomlValue getValue() {
-    return findNotNullChildByClass(VomlValue.class);
+  @Nullable
+  public VomlStringPrefix getStringPrefix() {
+    return findChildByClass(VomlStringPrefix.class);
   }
 
 }

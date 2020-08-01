@@ -14,6 +14,9 @@ public interface VomlExpression extends PsiElement {
   VomlBackTop getBackTop();
 
   @Nullable
+  VomlExportStatement getExportStatement();
+
+  @Nullable
   VomlIncludeStatement getIncludeStatement();
 
   @Nullable
