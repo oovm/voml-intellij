@@ -55,7 +55,7 @@ public class VomlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKeyPath(@NotNull VomlKeyPath o) {
+  public void visitKeySymbol(@NotNull VomlKeySymbol o) {
     visitPsiElement(o);
   }
 

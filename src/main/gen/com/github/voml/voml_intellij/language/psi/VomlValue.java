@@ -35,6 +35,9 @@ public interface VomlValue extends PsiElement {
   PsiElement getByte();
 
   @Nullable
+  PsiElement getDecimal();
+
+  @Nullable
   PsiElement getInteger();
 
   @Nullable

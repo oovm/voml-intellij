@@ -83,6 +83,12 @@ public class VomlValueImpl extends ASTWrapperPsiElement implements VomlValue {
 
   @Override
   @Nullable
+  public PsiElement getDecimal() {
+    return findChildByType(DECIMAL);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getInteger() {
     return findChildByType(INTEGER);
   }

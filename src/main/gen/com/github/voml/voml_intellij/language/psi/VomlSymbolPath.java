@@ -8,12 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface VomlSymbolPath extends PsiElement {
 
   @NotNull
+  List<VomlKeySymbol> getKeySymbolList();
+
+  @NotNull
   List<VomlStringInline> getStringInlineList();
-
-  @NotNull
-  List<VomlStringMulti> getStringMultiList();
-
-  @NotNull
-  List<VomlStringPrefix> getStringPrefixList();
 
 }

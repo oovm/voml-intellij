@@ -29,20 +29,14 @@ public class VomlSymbolPathImpl extends ASTWrapperPsiElement implements VomlSymb
 
   @Override
   @NotNull
+  public List<VomlKeySymbol> getKeySymbolList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlKeySymbol.class);
+  }
+
+  @Override
+  @NotNull
   public List<VomlStringInline> getStringInlineList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlStringInline.class);
-  }
-
-  @Override
-  @NotNull
-  public List<VomlStringMulti> getStringMultiList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlStringMulti.class);
-  }
-
-  @Override
-  @NotNull
-  public List<VomlStringPrefix> getStringPrefixList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlStringPrefix.class);
   }
 
 }

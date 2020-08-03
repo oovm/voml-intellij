@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.voml.voml_intellij</id>
-    <name>Voml Extended Support</name>
+    <name>VOML Support</name>
     <vendor>voml</vendor>
 
     <description><![CDATA[
@@ -19,57 +19,57 @@
                 name="Voml file"
                 implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
                 fieldName="INSTANCE"
-                language="Voml"
+                language="VOML"
                 extensions="voml"
         />
         <lang.parserDefinition
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.language.VomlParserDefinition"
         />
         <lang.syntaxHighlighter
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.VomlSyntaxHighlighter"
         />
         <colorSettingsPage
                 implementation="com.github.voml.voml_intellij.ide.colors.VomlColorSettingsPage"
         />
         <lang.commenter
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.VomlCommenter"
         />
         <lang.braceMatcher
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.braces.VomlBraceMatcher"
         />
         <lang.quoteHandler
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.VomlQuoteHandler"
         />
         <lang.foldingBuilder
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.folding.VomlFoldingBuilder"
         />
         <indexPatternBuilder
                 implementation="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexPatternBuilder"
         />
         <todoIndexer
-                filetype="Voml"
+                filetype="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexer"
         />
         <completion.contributor
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.completion.VomlOptionCompletionContributor"
         />
         <annotator
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlHighlightingAnnotator"
         />
         <annotator
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlObjectCheckerAnnotator"
         />
         <annotator
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlTableCheckerAnnotator"
         />
         <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
@@ -78,11 +78,11 @@
                 implementation="com.github.voml.voml_intellij.ide.codestyle.VomlLanguageCodeStyleSettingsProvider"
         />
         <lang.formatter
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.formatter.VomlFormattingModelBuilder"
         />
         <lang.smartEnterProcessor
-                language="Voml"
+                language="VOML"
                 implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
         />
     </extensions>

@@ -11,14 +11,14 @@ import static com.github.voml.voml_intellij.language.psi.VomlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.voml_intellij.language.psi.*;
 
-public class VomlKeyPathImpl extends ASTWrapperPsiElement implements VomlKeyPath {
+public class VomlKeySymbolImpl extends ASTWrapperPsiElement implements VomlKeySymbol {
 
-  public VomlKeyPathImpl(@NotNull ASTNode node) {
+  public VomlKeySymbolImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VomlVisitor visitor) {
-    visitor.visitKeyPath(this);
+    visitor.visitKeySymbol(this);
   }
 
   @Override
@@ -29,8 +29,8 @@ public class VomlKeyPathImpl extends ASTWrapperPsiElement implements VomlKeyPath
 
   @Override
   @NotNull
-  public VomlSymbolPath getSymbolPath() {
-    return findNotNullChildByClass(VomlSymbolPath.class);
+  public PsiElement getSymbol() {
+    return findNotNullChildByType(SYMBOL);
   }
 
 }

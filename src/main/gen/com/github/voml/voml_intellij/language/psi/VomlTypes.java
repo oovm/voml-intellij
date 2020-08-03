@@ -20,7 +20,7 @@ public interface VomlTypes {
   IElementType INSERT_ITEM = new VomlElementType("INSERT_ITEM");
   IElementType INSERT_PAIR = new VomlElementType("INSERT_PAIR");
   IElementType INSERT_STAR = new VomlElementType("INSERT_STAR");
-  IElementType KEY_PATH = new VomlElementType("KEY_PATH");
+  IElementType KEY_SYMBOL = new VomlElementType("KEY_SYMBOL");
   IElementType NUMBER_SUFFIX = new VomlElementType("NUMBER_SUFFIX");
   IElementType PAIR = new VomlElementType("PAIR");
   IElementType PAIRED = new VomlElementType("PAIRED");
@@ -57,7 +57,6 @@ public interface VomlTypes {
   IElementType EQ = new VomlTokenType("=");
   IElementType ESCAPE = new VomlTokenType("\\");
   IElementType EXPORT = new VomlTokenType("@export");
-  IElementType FLOAT = new VomlTokenType("FLOAT");
   IElementType IMPORT = new VomlTokenType("@import");
   IElementType INCLUDE = new VomlTokenType("@include");
   IElementType INHERIT = new VomlTokenType("@inherit");
@@ -113,8 +112,8 @@ public interface VomlTypes {
       else if (type == INSERT_STAR) {
         return new VomlInsertStarImpl(node);
       }
-      else if (type == KEY_PATH) {
-        return new VomlKeyPathImpl(node);
+      else if (type == KEY_SYMBOL) {
+        return new VomlKeySymbolImpl(node);
       }
       else if (type == NUMBER_SUFFIX) {
         return new VomlNumberSuffixImpl(node);

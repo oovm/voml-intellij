@@ -319,44 +319,26 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // str | SYMBOL | INTEGER
-  static boolean key_like(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "key_like")) return false;
+  // string_inline | key_symbol | INTEGER
+  static boolean key(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "key")) return false;
     boolean r;
-    r = str(b, l + 1);
-    if (!r) r = consumeToken(b, SYMBOL);
+    r = string_inline(b, l + 1);
+    if (!r) r = key_symbol(b, l + 1);
     if (!r) r = consumeToken(b, INTEGER);
     return r;
   }
 
   /* ********************************************************** */
-  // [DOT*] symbol_path
-  public static boolean key_path(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "key_path")) return false;
+  // SYMBOL
+  public static boolean key_symbol(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "key_symbol")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KEY_PATH, "<key path>");
-    r = key_path_0(b, l + 1);
-    r = r && symbol_path(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SYMBOL);
+    exit_section_(b, m, KEY_SYMBOL, r);
     return r;
-  }
-
-  // [DOT*]
-  private static boolean key_path_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "key_path_0")) return false;
-    key_path_0_0(b, l + 1);
-    return true;
-  }
-
-  // DOT*
-  private static boolean key_path_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "key_path_0_0")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!consumeToken(b, DOT)) break;
-      if (!empty_element_parsed_guard_(b, "key_path_0_0", c)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -551,11 +533,11 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // str | scope_symbol | INTEGER
+  // string_inline | scope_symbol | INTEGER
   static boolean scope_key(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scope_key")) return false;
     boolean r;
-    r = str(b, l + 1);
+    r = string_inline(b, l + 1);
     if (!r) r = scope_symbol(b, l + 1);
     if (!r) r = consumeToken(b, INTEGER);
     return r;
@@ -727,18 +709,18 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // key_like (DOT key_like)*
+  // key (DOT key)*
   public static boolean symbol_path(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol_path")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SYMBOL_PATH, "<symbol path>");
-    r = key_like(b, l + 1);
+    r = key(b, l + 1);
     r = r && symbol_path_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (DOT key_like)*
+  // (DOT key)*
   private static boolean symbol_path_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol_path_1")) return false;
     while (true) {
@@ -749,13 +731,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // DOT key_like
+  // DOT key
   private static boolean symbol_path_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol_path_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, DOT);
-    r = r && key_like(b, l + 1);
+    r = r && key(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

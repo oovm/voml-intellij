@@ -28,6 +28,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.ANNOTATION, VomlTypes.ANNOTATION_MARK -> VomlColor.ANNOTATION
             VomlTypes.SCOPE_SYMBOL -> VomlColor.SCOPE_SYMBOL
             VomlTypes.SCOPE_MARK -> VomlColor.SCOPE_MARK
+            VomlTypes.INSERT_DOT, VomlTypes.INSERT_STAR -> VomlColor.INSERT_MARK
             //
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
             VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS

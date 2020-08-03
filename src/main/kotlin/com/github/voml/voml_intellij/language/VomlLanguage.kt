@@ -8,13 +8,12 @@ import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
 
-class VomlLanguage private constructor() : Language("Voml") {
+class VomlLanguage private constructor() : Language("VOML") {
     companion object {
         @JvmStatic
         val INSTANCE = VomlLanguage()
     }
 }
-
 class VomlFileType private constructor() : LanguageFileType(VomlLanguage.INSTANCE) {
     override fun getName(): String = VomlBundle.message("filetype.voml.name")
 

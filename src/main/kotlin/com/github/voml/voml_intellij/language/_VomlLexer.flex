@@ -32,7 +32,7 @@ SYMBOL=[A-Za-z_][A-Za-z0-9_]*
 STRING=('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
-FLOAT=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
+DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
 SIGN=[+-]
 NON_ESCAPE=[^\\]
 
@@ -66,7 +66,6 @@ NON_ESCAPE=[^\\]
   "."                  { return DOT; }
   "*"                  { return STAR; }
   "@"                  { return AT; }
-  "DECIMAL"            { return DECIMAL; }
 
   {COMMENT}            { return COMMENT; }
   {BLOCK_COMMENT}      { return BLOCK_COMMENT; }
@@ -75,7 +74,7 @@ NON_ESCAPE=[^\\]
   {STRING}             { return STRING; }
   {BYTE}               { return BYTE; }
   {INTEGER}            { return INTEGER; }
-  {FLOAT}              { return FLOAT; }
+  {DECIMAL}            { return DECIMAL; }
   {SIGN}               { return SIGN; }
   {NON_ESCAPE}         { return NON_ESCAPE; }
 

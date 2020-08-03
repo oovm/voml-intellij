@@ -35,11 +35,11 @@ class VomlColorSettingsPage : ColorSettingsPage {
 }
 
 [<SCOPE_SYMBOL>literals</SCOPE_SYMBOL>]
-<KEY_SYMBOL>boolean</KEY_SYMBOL> = [<BOOLEAN>true</BOOLEAN>, <BOOLEAN>false</BOOLEAN>]
+<KEY_SYMBOL>boolean</KEY_SYMBOL> = [true, false]
 
 [<SCOPE_SYMBOL>literals</SCOPE_SYMBOL>.<SCOPE_SYMBOL>number</SCOPE_SYMBOL>]
-<KEY_SYMBOL>integer</KEY_SYMBOL>  = <INTEGER>10</INTEGER>cm
-<KEY_SYMBOL>decimal</KEY_SYMBOL>  = <DECIMAL>0.1</DECIMAL>m
+<KEY_SYMBOL>integer</KEY_SYMBOL>  = <INTEGER>10</INTEGER><NUMBER_HINT>cm</NUMBER_HINT>
+<KEY_SYMBOL>decimal</KEY_SYMBOL>  = <DECIMAL>0.1</DECIMAL><NUMBER_HINT>m</NUMBER_HINT>
 <KEY_SYMBOL>string</KEY_SYMBOL>   = <STRING>"string"</STRING>
 <KEY_SYMBOL>escape</KEY_SYMBOL>   = <STRING>"\n"</STRING>
 
@@ -50,7 +50,7 @@ class VomlColorSettingsPage : ColorSettingsPage {
 [<SCOPE_SYMBOL>scopes</SCOPE_SYMBOL>]
 	[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>a1</SCOPE_SYMBOL>]
 	<KEY_SYMBOL>key1</KEY_SYMBOL> = "scopes.b1.key1"
-	[<SCOPE_MARK>^</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  # {^.b2}
+	[<SCOPE_MARK>^</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  // {^.b2}
 	<KEY_SYMBOL>key2</KEY_SYMBOL> = "scopes.b2.key2"
 		[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>b1</SCOPE_SYMBOL>]
 		<KEY_SYMBOL>key3</KEY_SYMBOL> = "a.a2.b1.key3"
@@ -61,21 +61,20 @@ class VomlColorSettingsPage : ColorSettingsPage {
 	[<SCOPE_MARK><</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  // same as [<][^a2]
 	<KEY_SYMBOL>key<KEY_SYMBOL> = "scopes.b1.key"
 
-<SCOPE_MARK>---</SCOPE_MARK> # Back2Top
+<SCOPE_MARK>---</SCOPE_MARK> // Back2Top
 
-connection_max.a = 5cm
 v = [
-	@merge(override)
-	@merge_as_source(unset)
-	@merge_as_target(ignore)
+	<ANNOTATION>@merge</ANNOTATION>(override)
+	<ANNOTATION>@merge_as_source</ANNOTATION>(unset)
+	<ANNOTATION>@merge_as_target</ANNOTATION>(ignore)
 	a = Some(1)
     b = None()
 ]
 
 [name]
-  <ITEM_MARK>.</ITEM_MARK> a = 2
-  <ITEM_MARK>*</ITEM_MARK> 1
-  <ITEM_MARK>*</ITEM_MARK> [true]
+  <INSERT_MARK>.</INSERT_MARK> a = 2
+  <INSERT_MARK>*</INSERT_MARK> 1
+  <INSERT_MARK>*</INSERT_MARK> [true]
 """
 
     override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
