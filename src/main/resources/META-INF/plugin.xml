@@ -16,7 +16,7 @@
     <resource-bundle>messages.VomlBundle</resource-bundle>
     <extensions defaultExtensionNs="com.intellij">
         <fileType
-                name="Voml file"
+                name="VOML"
                 implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
                 fieldName="INSTANCE"
                 language="VOML"
