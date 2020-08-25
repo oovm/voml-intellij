@@ -8,12 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface VomlInheritStatement extends PsiElement {
 
   @Nullable
+  VomlPredefinedSymbol getPredefinedSymbol();
+
+  @Nullable
   VomlStringInline getStringInline();
 
   @Nullable
   VomlStringPrefix getStringPrefix();
-
-  @Nullable
-  PsiElement getSymbol();
 
 }

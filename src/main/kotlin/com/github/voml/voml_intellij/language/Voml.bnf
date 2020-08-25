@@ -28,7 +28,7 @@
         BOOLEAN = 'regexp:true|false'
 
         SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
-		STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\\'|\\)*\")"
+		STRING = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
         BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
         DECIMAL = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
@@ -74,10 +74,11 @@ expression ::= scope
 // ------------------------------------
 export_statement ::= EXPORT [string_prefix] string_inline;
 // ------------------------------------
-inherit_statement ::= INHERIT (SYMBOL | [string_prefix] string_inline);
+inherit_statement ::= INHERIT (predefined_symbol | [string_prefix] string_inline);
+predefined_symbol ::= SYMBOL;
 // -------------------------------G-----
-include_statement ::= INCLUDE [string_prefix] string_inline (AS SYMBOL <<paired include_inner>>);
-private include_inner ::= SYMBOL*;
+include_statement ::= INCLUDE [string_prefix] string_inline (AS key_symbol | <<paired include_inner>>);
+private include_inner ::= key_symbol*;
 
 // ------------------------------------
 scope ::= <<paired scope_inner>>;

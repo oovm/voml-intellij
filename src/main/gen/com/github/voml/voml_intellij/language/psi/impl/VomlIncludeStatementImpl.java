@@ -28,9 +28,15 @@ public class VomlIncludeStatementImpl extends ASTWrapperPsiElement implements Vo
   }
 
   @Override
-  @NotNull
+  @Nullable
+  public VomlKeySymbol getKeySymbol() {
+    return findChildByClass(VomlKeySymbol.class);
+  }
+
+  @Override
+  @Nullable
   public VomlPaired getPaired() {
-    return findNotNullChildByClass(VomlPaired.class);
+    return findChildByClass(VomlPaired.class);
   }
 
   @Override
@@ -43,12 +49,6 @@ public class VomlIncludeStatementImpl extends ASTWrapperPsiElement implements Vo
   @Nullable
   public VomlStringPrefix getStringPrefix() {
     return findChildByClass(VomlStringPrefix.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getSymbol() {
-    return findNotNullChildByType(SYMBOL);
   }
 
 }

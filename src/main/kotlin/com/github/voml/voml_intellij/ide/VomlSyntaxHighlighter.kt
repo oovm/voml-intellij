@@ -22,10 +22,12 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
         return when (tokenType) {
             //
             VomlTypes.INCLUDE, VomlTypes.INHERIT, VomlTypes.AS -> VomlColor.KEYWORD
+            VomlTypes.ANNOTATION, VomlTypes.ANNOTATION_MARK -> VomlColor.ANNOTATION
+            VomlTypes.PREDEFINED_SYMBOL -> VomlColor.PREDEFINED
+            //
             VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
             VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
-            VomlTypes.ANNOTATION, VomlTypes.ANNOTATION_MARK -> VomlColor.ANNOTATION
             VomlTypes.SCOPE_SYMBOL -> VomlColor.SCOPE_SYMBOL
             VomlTypes.SCOPE_MARK -> VomlColor.SCOPE_MARK
             VomlTypes.INSERT_DOT, VomlTypes.INSERT_STAR -> VomlColor.INSERT_MARK

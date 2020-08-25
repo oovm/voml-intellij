@@ -18,19 +18,20 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     // 字面量
     NULL(VomlBundle.messagePointer("color.settings.voml.null"), Default.KEYWORD),
     BOOLEAN(VomlBundle.messagePointer("color.settings.voml.boolean"), Default.KEYWORD),
-    NUMBER_HINT(VomlBundle.messagePointer("color.settings.toml.number_hint"), Default.IDENTIFIER),
+    NUMBER_HINT(VomlBundle.messagePointer("color.settings.toml.number_hint"), Default.METADATA),
     DECIMAL(VomlBundle.messagePointer("color.settings.toml.decimal"), Default.NUMBER),
     INTEGER(VomlBundle.messagePointer("color.settings.toml.integer"), Default.NUMBER),
     STRING_HINT(VomlBundle.messagePointer("color.settings.toml.string_hint"), Default.KEYWORD),
     STRING(OptionsBundle.messagePointer("options.language.defaults.string"), Default.STRING),
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
     //
-    TYPE_HINT(VomlBundle.messagePointer("color.settings.toml.type_hint"), Default.IDENTIFIER),
+    TYPE_HINT(VomlBundle.messagePointer("color.settings.toml.type_hint"), Default.CLASS_NAME),
     KEY_SYMBOL(VomlBundle.messagePointer("color.settings.voml.key_symbol"), Default.STATIC_FIELD),
     SCOPE_SYMBOL(VomlBundle.messagePointer("color.settings.voml.scope_symbol"), Default.STATIC_METHOD),
     SCOPE_MARK(VomlBundle.messagePointer("color.settings.voml.scope_mark"), KEYWORD.textAttributesKey),
     INSERT_MARK(VomlBundle.messagePointer("color.settings.voml.item_mark"), KEYWORD.textAttributesKey),
     ANNOTATION(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
+    PREDEFINED(OptionsBundle.messagePointer("options.language.defaults.predefined"), Default.PREDEFINED_SYMBOL),
     // 标点符号
     PARENTHESES(OptionsBundle.messagePointer("options.language.defaults.parentheses"), Default.PARENTHESES),
     BRACKETS(OptionsBundle.messagePointer("options.language.defaults.brackets"), Default.BRACKETS),

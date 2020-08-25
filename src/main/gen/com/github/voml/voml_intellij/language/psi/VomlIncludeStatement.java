@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface VomlIncludeStatement extends PsiElement {
 
-  @NotNull
+  @Nullable
+  VomlKeySymbol getKeySymbol();
+
+  @Nullable
   VomlPaired getPaired();
 
   @NotNull
@@ -15,8 +18,5 @@ public interface VomlIncludeStatement extends PsiElement {
 
   @Nullable
   VomlStringPrefix getStringPrefix();
-
-  @NotNull
-  PsiElement getSymbol();
 
 }

@@ -4,9 +4,11 @@
     <vendor>voml</vendor>
 
     <description><![CDATA[
-    Plugin adds support for VOML
-    Plugin adds support for VOML
-    Plugin adds support for VOML
+Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
+
+## Features
+- Syntax Highlight
+- Braces Matcher
     ]]></description>
 
     <!-- Product and plugin compatibility requirements -->

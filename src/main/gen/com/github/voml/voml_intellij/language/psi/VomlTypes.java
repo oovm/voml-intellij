@@ -24,6 +24,7 @@ public interface VomlTypes {
   IElementType NUMBER_SUFFIX = new VomlElementType("NUMBER_SUFFIX");
   IElementType PAIR = new VomlElementType("PAIR");
   IElementType PAIRED = new VomlElementType("PAIRED");
+  IElementType PREDEFINED_SYMBOL = new VomlElementType("PREDEFINED_SYMBOL");
   IElementType REF = new VomlElementType("REF");
   IElementType SCOPE = new VomlElementType("SCOPE");
   IElementType SCOPE_MARK = new VomlElementType("SCOPE_MARK");
@@ -123,6 +124,9 @@ public interface VomlTypes {
       }
       else if (type == PAIRED) {
         return new VomlPairedImpl(node);
+      }
+      else if (type == PREDEFINED_SYMBOL) {
+        return new VomlPredefinedSymbolImpl(node);
       }
       else if (type == REF) {
         return new VomlRefImpl(node);

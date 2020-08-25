@@ -29,6 +29,12 @@ public class VomlInheritStatementImpl extends ASTWrapperPsiElement implements Vo
 
   @Override
   @Nullable
+  public VomlPredefinedSymbol getPredefinedSymbol() {
+    return findChildByClass(VomlPredefinedSymbol.class);
+  }
+
+  @Override
+  @Nullable
   public VomlStringInline getStringInline() {
     return findChildByClass(VomlStringInline.class);
   }
@@ -37,12 +43,6 @@ public class VomlInheritStatementImpl extends ASTWrapperPsiElement implements Vo
   @Nullable
   public VomlStringPrefix getStringPrefix() {
     return findChildByClass(VomlStringPrefix.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getSymbol() {
-    return findChildByType(SYMBOL);
   }
 
 }
