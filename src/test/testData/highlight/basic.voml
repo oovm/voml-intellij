@@ -1,7 +1,7 @@
 @inherit user;
 
 @include json "some/path/test.json" as json;
-@include "https:example.org/test.voml" {
+@include "https://example.org/test.voml" {
 	external_key as external
 }
 
@@ -21,20 +21,20 @@ escape   = "\n"
 key = null
 
 [scopes]
-	[>a1]
-	key1 = "scopes.b1.key1"
-	[^a2]  # {^.b2}
-	key2 = "scopes.b2.key2"
+	[>a1] // 增加层级
+	key1 = "scopes.a1.key1"
+	[^a2] // 维持层级
+	key2 = "scopes.a2.key2"
 		[>b1]
 		key3 = "a.a2.b1.key3"
-	[<]
-	key4 = "scopes.b1.key4"
+	[<] // 减少层级
+	key4 = "scopes.a2.key4"
 		[>b1]
 		key5 = "a.a2.b1.key5"
-	[<a2]  // same as [<][^a2]
-	key = "scopes.b1.key"
+	[<a3]  // 同 [<][^a2]
+	key = "scopes.a3.key"
 
---- # 返回顶级
+--- // 返回顶级
 
 connection_max.a = 5cm
 v = [
@@ -50,8 +50,3 @@ v = [
   * a
   * b
 
-
-// 标准键盘上不需要 shift 的符号
-// [];',./`-=
-// 小键盘上的符号
-// /*-+.

@@ -1,4 +1,4 @@
-package com.github.voml.voml_intellij.ide.codestyle
+package com.github.voml.voml_intellij.ide.codeStyle
 
 import com.github.voml.voml_intellij.language.VomlLanguage
 import com.intellij.application.options.GenerationCodeStylePanel

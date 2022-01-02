@@ -1,4 +1,4 @@
-package com.github.voml.voml_intellij.ide.codestyle
+package com.github.voml.voml_intellij.ide.codeStyle
 
 import com.github.voml.voml_intellij.language.VomlLanguage
 import com.intellij.application.options.CodeStyleAbstractConfigurable
@@ -63,26 +63,58 @@ class VomlLanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsProvider(
     }
 
     override fun getCodeSample(settingsType: SettingsType) =
-"""Scene( // class name is optional
-    materials: { // this is a map
-        "metal": (
-            reflectivity: 1.0,
-        ),
-        "plastic": (
-            reflectivity: 0.5,
-        ),
-    },
-    entities: [ // this is an array
-        (
-            name: "hero",
-            material: "metal",
-        ),
-        (
-            name: "monster",
-            material: "plastic",
-        ),
-    ],
-)"""
+"""@inherit user;
+
+@include json "some/path/test.json" as json;
+@include "https://example.org/test.voml" {
+	external_key as external
+}
+
+[literals]
+boolean = [true, false]
+
+[literals.number]
+integer  = 10cm
+decimal  = 0.1m
+
+[literals.string]
+string   = "string"
+escape   = "\n"
+
+[keywords]
+// remove this key-value pair
+key = null
+
+[scopes]
+	[>a1]
+	key1 = "scopes.a1.key1"
+	[^a2]
+	key2 = "scopes.a2.key2"
+		[>b1]
+		key3 = "a.a2.b1.key3"
+	[<]
+	key4 = "scopes.a2.key4"
+		[>b1]
+		key5 = "a.a2.b1.key5"
+	[<a3]
+	key = "scopes.a3.key"
+
+---
+
+connection_max.a = 5cm
+v = [
+	@merge(override)
+	@merge_as_source(unset)
+	@merge_as_target(ignore)
+	a = Some(1)
+    b = None()
+]
+
+[name]
+  . a = 2
+  * a
+  * b
+"""
 
     companion object {
         const val DEFAULT_RIGHT_MARGIN = 100

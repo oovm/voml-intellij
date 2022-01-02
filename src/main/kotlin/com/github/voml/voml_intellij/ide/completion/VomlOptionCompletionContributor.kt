@@ -20,7 +20,14 @@ class VomlOptionCompletionContributor : CompletionContributor() {
                 ) {
                     resultSet.addElement(
                         LookupElementBuilder
-                            .create("enable()")
+                            .create("@include")
+                            .withInsertHandler { ctx, _ ->
+                                EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
+                            }
+                    )
+                    resultSet.addElement(
+                        LookupElementBuilder
+                            .create("@inherit")
                             .withInsertHandler { ctx, _ ->
                                 EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
                             }
@@ -32,7 +39,7 @@ class VomlOptionCompletionContributor : CompletionContributor() {
                                 EditorModificationUtil.moveCaretRelatively(ctx.editor, - 1)
                             }
                     )
-                    resultSet.addElement(LookupElementBuilder.create("None"))
+                    resultSet.addElement(LookupElementBuilder.create("None()"))
                 }
             }
         )

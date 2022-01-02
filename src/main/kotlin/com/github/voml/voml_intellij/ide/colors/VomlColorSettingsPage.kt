@@ -30,7 +30,7 @@ class VomlColorSettingsPage : ColorSettingsPage {
 """<KEYWORD>@inherit</KEYWORD> <PREDEFINED>user</PREDEFINED>;
 
 @include <STRING_HINT>json</STRING_HINT> <STRING>"some/path/test.json"</STRING> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>json</KEY_SYMBOL>;
-@include <STRING>"https:example.org/test.voml"</STRING> {
+@include <STRING>"https://example.org/test.voml"</STRING> {
 	<KEY_SYMBOL>external_key</KEY_SYMBOL> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>external</KEY_SYMBOL>
 }
 
@@ -47,17 +47,17 @@ class VomlColorSettingsPage : ColorSettingsPage {
 
 [<SCOPE_SYMBOL>scopes</SCOPE_SYMBOL>]
 	[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>a1</SCOPE_SYMBOL>] // Increase scope level
-	<KEY_SYMBOL>key1</KEY_SYMBOL> = <STRING>"scopes.b1.key1"</STRING>
+	<KEY_SYMBOL>key1</KEY_SYMBOL> = <STRING>"scopes.a1.key1"</STRING>
 	[<SCOPE_MARK>^</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>] // Maintain scope level
-	<KEY_SYMBOL>key2</KEY_SYMBOL> = <STRING>"scopes.b2.key2"</STRING>
+	<KEY_SYMBOL>key2</KEY_SYMBOL> = <STRING>"scopes.a2.key2"</STRING>
 		[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>b1</SCOPE_SYMBOL>]
 		<KEY_SYMBOL>key3</KEY_SYMBOL> = <STRING>"a.a2.b1.key3"</STRING>
 	[<SCOPE_MARK><</SCOPE_MARK>] // Decrease scope level
-	<KEY_SYMBOL>key4</KEY_SYMBOL> = <STRING>"scopes.b1.key4"</STRING>
+	<KEY_SYMBOL>key4</KEY_SYMBOL> = <STRING>"scopes.a2.key4"</STRING>
 		[<SCOPE_MARK>></SCOPE_MARK><SCOPE_SYMBOL>b1</SCOPE_SYMBOL>]
 		<KEY_SYMBOL>key5</KEY_SYMBOL> = <STRING>"a.a2.b1.key5"</STRING>
 	[<SCOPE_MARK><</SCOPE_MARK><SCOPE_SYMBOL>a2</SCOPE_SYMBOL>]  // same as [<][^a2]
-	<KEY_SYMBOL>key</KEY_SYMBOL> = <STRING>"scopes.b1.key"</STRING>
+	<KEY_SYMBOL>key</KEY_SYMBOL> = <STRING>"scopes.a3.key"</STRING>
 
 <SCOPE_MARK>---</SCOPE_MARK> // Back2Top
 

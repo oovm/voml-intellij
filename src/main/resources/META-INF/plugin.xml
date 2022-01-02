@@ -68,7 +68,7 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
         />
         <annotator
                 language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlObjectCheckerAnnotator"
+                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlScopeCheckerAnnotator"
         />
         <annotator
                 language="VOML"
@@ -77,7 +77,7 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
         <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
         <langCodeStyleSettingsProvider
-                implementation="com.github.voml.voml_intellij.ide.codestyle.VomlLanguageCodeStyleSettingsProvider"
+                implementation="com.github.voml.voml_intellij.ide.codeStyle.VomlLanguageCodeStyleSettingsProvider"
         />
         <lang.formatter
                 language="VOML"

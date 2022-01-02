@@ -1,6 +1,7 @@
 package com.github.voml.voml_intellij.ide.actions
 
 import com.github.voml.voml_intellij.ide.icons.VomlIcons
+import com.github.voml.voml_intellij.language.VomlBundle
 import com.intellij.ide.actions.CreateFileFromTemplateAction
 import com.intellij.ide.actions.CreateFileFromTemplateDialog
 import com.intellij.openapi.project.Project
@@ -16,6 +17,6 @@ class VomlCreateFile : CreateFileFromTemplateAction(NAME, "Create new Voml file"
     override fun getActionName(directory: PsiDirectory, newName: String, templateName: String): String = NAME
 
     companion object {
-        private const val NAME = "Voml File"
+        private val NAME = VomlBundle.message("filetype.voml.create")
     }
 }
