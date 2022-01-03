@@ -16,19 +16,20 @@
     psiImplUtilClass = "com.github.voml.voml_intellij.language.psi.impl.VomlPsiImplUtil"
 
     tokens = [
-        COMMENT = 'regexp://[^\r\n]*'
+        COMMENT = 'regexp:(//|#)[^\r\n]*'
         BLOCK_COMMENT = 'regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]'
-        NULL = 'null'
+
         INCLUDE = '@include'
         INHERIT = '@inherit'
         IMPORT = '@import'
         EXPORT = '@export'
         AS = "as"
 
+        NULL = 'null'
         BOOLEAN = 'regexp:true|false'
 
         SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
-		STRING = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
+        STRING = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
         BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
         DECIMAL = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'

@@ -25,7 +25,7 @@ import static com.github.voml.voml_intellij.language.psi.VomlTypes.*;
 EOL=\R
 WHITE_SPACE=\s+
 
-COMMENT="//"[^\r\n]*
+COMMENT=("//"|#)[^\r\n]*
 BLOCK_COMMENT=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 BOOLEAN=true|false
 SYMBOL=[A-Za-z_][A-Za-z0-9_]*
