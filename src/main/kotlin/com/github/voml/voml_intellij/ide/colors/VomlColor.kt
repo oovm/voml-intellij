@@ -29,7 +29,7 @@ enum class VomlColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String
     KEY_SYMBOL(VomlBundle.messagePointer("color.settings.voml.key_symbol"), Default.STATIC_FIELD),
     SCOPE_SYMBOL(VomlBundle.messagePointer("color.settings.voml.scope_symbol"), Default.STATIC_METHOD),
     SCOPE_MARK(VomlBundle.messagePointer("color.settings.voml.scope_mark"), KEYWORD.textAttributesKey),
-    INSERT_MARK(VomlBundle.messagePointer("color.settings.voml.item_mark"), KEYWORD.textAttributesKey),
+    INSERT_MARK(VomlBundle.messagePointer("color.settings.voml.insert_mark"), KEYWORD.textAttributesKey),
     ANNOTATION(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
     PREDEFINED(OptionsBundle.messagePointer("options.language.defaults.predefined"), Default.PREDEFINED_SYMBOL),
     // 标点符号
