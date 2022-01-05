@@ -35,12 +35,6 @@ public class VomlExpressionImpl extends ASTWrapperPsiElement implements VomlExpr
 
   @Override
   @Nullable
-  public VomlBackTop getBackTop() {
-    return findChildByClass(VomlBackTop.class);
-  }
-
-  @Override
-  @Nullable
   public VomlExportStatement getExportStatement() {
     return findChildByClass(VomlExportStatement.class);
   }
@@ -73,6 +67,12 @@ public class VomlExpressionImpl extends ASTWrapperPsiElement implements VomlExpr
   @Nullable
   public VomlScope getScope() {
     return findChildByClass(VomlScope.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getBackTop() {
+    return findChildByType(BACK_TOP);
   }
 
 }

@@ -29,8 +29,8 @@ public class VomlStringInlineImpl extends ASTWrapperPsiElement implements VomlSt
 
   @Override
   @NotNull
-  public List<VomlEscaped> getEscapedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlEscaped.class);
+  public PsiElement getString() {
+    return findNotNullChildByType(STRING);
   }
 
 }

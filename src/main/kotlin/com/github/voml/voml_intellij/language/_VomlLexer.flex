@@ -29,11 +29,12 @@ COMMENT=("//"|#)[^\r\n]*
 BLOCK_COMMENT=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 BOOLEAN=true|false
 SYMBOL=[A-Za-z_][A-Za-z0-9_]*
-STRING='([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\'|\\)*\"
+STRING=\"([^\"\\]|\\.)*\"
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
 DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
 SIGN=[+-]
+BACK_TOP=[-][-][-]+
 NON_ESCAPE=[^\\]
 
 %%
@@ -76,6 +77,7 @@ NON_ESCAPE=[^\\]
   {INTEGER}            { return INTEGER; }
   {DECIMAL}            { return DECIMAL; }
   {SIGN}               { return SIGN; }
+  {BACK_TOP}           { return BACK_TOP; }
   {NON_ESCAPE}         { return NON_ESCAPE; }
 
 }

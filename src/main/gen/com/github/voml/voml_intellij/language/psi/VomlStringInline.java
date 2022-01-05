@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface VomlStringInline extends PsiElement {
 
   @NotNull
-  List<VomlEscaped> getEscapedList();
+  PsiElement getString();
 
 }

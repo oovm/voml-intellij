@@ -43,8 +43,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             DECIMAL -> VomlColor.DECIMAL
 
             STRING_PREFIX -> VomlColor.STRING_HINT
-            STRING_INLINE -> VomlColor.STRING
-            STRING_MULTI -> VomlColor.STRING
+            STRING, STRING_INLINE, STRING_MULTI -> VomlColor.STRING
 
             SYMBOL -> getSymbolColor(tokenType)
             // 注释

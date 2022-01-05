@@ -29,11 +29,12 @@
         BOOLEAN = 'regexp:true|false'
 
         SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
-        STRING = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
+        STRING = 'regexp:"([^"\\]|\\.)*"'
         BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
         DECIMAL = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
         SIGN = 'regexp:[+-]'
+        BACK_TOP = 'regexp:[-][-][-]+' // [-]{3,}
 
         PARENTHESIS_L = '('
         PARENTHESIS_R = ')'
@@ -64,7 +65,7 @@
 Voml ::= expression*;
 
 expression ::= scope
-    | back_top
+    | BACK_TOP
     | include_statement
     | inherit_statement
     | export_statement
@@ -79,14 +80,15 @@ inherit_statement ::= INHERIT (predefined_symbol | [string_prefix] string_inline
 predefined_symbol ::= SYMBOL;
 // -------------------------------------
 include_statement ::= INCLUDE [string_prefix] string_inline (AS key_symbol | <<paired include_inner>>);
-private include_inner ::= key_symbol*;
+private include_inner ::= [include_item (COMMA include_item)* [COMMA]];
+private include_item ::= scope_symbol AS scope_symbol | scope_symbol;
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
-private scope_inner ::= [scope_mark] scope_path;
+private scope_inner ::=
+    [ACCENT|ANGLE_R|ANGLE_L+] scope_path
+  | ANGLE_L+ [scope_path];
 private scope_path  ::= scope_key (DOT scope_key)*
 private scope_key   ::= string_inline | scope_symbol | INTEGER;
-scope_mark ::= ACCENT | ANGLE_L+ | ANGLE_R;
-back_top ::= "---";
 scope_symbol ::= SYMBOL;
 // ------------------------------------
 pair ::= symbol_path eq value;
@@ -108,7 +110,7 @@ private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other
 private other_num ::= NAN;
 // ------------------------------------
 private str ::= [string_prefix] (string_inline|string_multi);
-string_inline ::= QUOTATION char* QUOTATION;
+string_inline ::= STRING;
 string_multi ::= QUOTATION char* QUOTATION;
 private char ::= escaped | NON_ESCAPE;
 escaped ::= ESCAPE (ESCAPE|NON_ESCAPE);

@@ -10,7 +10,6 @@ public interface VomlTypes {
 
   IElementType ANNOTATION = new VomlElementType("ANNOTATION");
   IElementType ANNOTATION_MARK = new VomlElementType("ANNOTATION_MARK");
-  IElementType BACK_TOP = new VomlElementType("BACK_TOP");
   IElementType ESCAPED = new VomlElementType("ESCAPED");
   IElementType EXPORT_STATEMENT = new VomlElementType("EXPORT_STATEMENT");
   IElementType EXPRESSION = new VomlElementType("EXPRESSION");
@@ -26,7 +25,6 @@ public interface VomlTypes {
   IElementType PREDEFINED_SYMBOL = new VomlElementType("PREDEFINED_SYMBOL");
   IElementType REF = new VomlElementType("REF");
   IElementType SCOPE = new VomlElementType("SCOPE");
-  IElementType SCOPE_MARK = new VomlElementType("SCOPE_MARK");
   IElementType SCOPE_SYMBOL = new VomlElementType("SCOPE_SYMBOL");
   IElementType STRING_INLINE = new VomlElementType("STRING_INLINE");
   IElementType STRING_MULTI = new VomlElementType("STRING_MULTI");
@@ -41,6 +39,7 @@ public interface VomlTypes {
   IElementType ANGLE_R = new VomlTokenType(">");
   IElementType AS = new VomlTokenType("as");
   IElementType AT = new VomlTokenType("@");
+  IElementType BACK_TOP = new VomlTokenType("BACK_TOP");
   IElementType BLOCK_COMMENT = new VomlTokenType("BLOCK_COMMENT");
   IElementType BOOLEAN = new VomlTokenType("BOOLEAN");
   IElementType BRACE_L = new VomlTokenType("{");
@@ -81,9 +80,6 @@ public interface VomlTypes {
       }
       else if (type == ANNOTATION_MARK) {
         return new VomlAnnotationMarkImpl(node);
-      }
-      else if (type == BACK_TOP) {
-        return new VomlBackTopImpl(node);
       }
       else if (type == ESCAPED) {
         return new VomlEscapedImpl(node);
@@ -129,9 +125,6 @@ public interface VomlTypes {
       }
       else if (type == SCOPE) {
         return new VomlScopeImpl(node);
-      }
-      else if (type == SCOPE_MARK) {
-        return new VomlScopeMarkImpl(node);
       }
       else if (type == SCOPE_SYMBOL) {
         return new VomlScopeSymbolImpl(node);

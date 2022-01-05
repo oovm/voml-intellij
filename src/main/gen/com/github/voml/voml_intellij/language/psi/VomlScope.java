@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface VomlScope extends PsiElement {
 
-  @Nullable
-  VomlScopeMark getScopeMark();
-
   @NotNull
   List<VomlScopeSymbol> getScopeSymbolList();
 

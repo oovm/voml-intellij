@@ -15,10 +15,6 @@ public class VomlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitBackTop(@NotNull VomlBackTop o) {
-    visitPsiElement(o);
-  }
-
   public void visitEscaped(@NotNull VomlEscaped o) {
     visitPsiElement(o);
   }
@@ -76,10 +72,6 @@ public class VomlVisitor extends PsiElementVisitor {
   }
 
   public void visitScope(@NotNull VomlScope o) {
-    visitPsiElement(o);
-  }
-
-  public void visitScopeMark(@NotNull VomlScopeMark o) {
     visitPsiElement(o);
   }
 

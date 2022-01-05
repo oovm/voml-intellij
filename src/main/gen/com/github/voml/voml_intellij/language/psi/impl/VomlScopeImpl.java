@@ -28,12 +28,6 @@ public class VomlScopeImpl extends ASTWrapperPsiElement implements VomlScope {
   }
 
   @Override
-  @Nullable
-  public VomlScopeMark getScopeMark() {
-    return findChildByClass(VomlScopeMark.class);
-  }
-
-  @Override
   @NotNull
   public List<VomlScopeSymbol> getScopeSymbolList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlScopeSymbol.class);

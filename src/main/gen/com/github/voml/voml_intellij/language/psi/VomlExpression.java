@@ -11,9 +11,6 @@ public interface VomlExpression extends PsiElement {
   VomlAnnotation getAnnotation();
 
   @Nullable
-  VomlBackTop getBackTop();
-
-  @Nullable
   VomlExportStatement getExportStatement();
 
   @Nullable
@@ -30,5 +27,8 @@ public interface VomlExpression extends PsiElement {
 
   @Nullable
   VomlScope getScope();
+
+  @Nullable
+  PsiElement getBackTop();
 
 }
