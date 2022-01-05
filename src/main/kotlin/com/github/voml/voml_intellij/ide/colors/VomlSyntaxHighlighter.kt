@@ -1,8 +1,7 @@
 package com.github.voml.voml_intellij.ide.colors
 
-import com.github.voml.voml_intellij.ide.colors.VomlColor
 import com.github.voml.voml_intellij.language.VomlLexerAdapter
-import com.github.voml.voml_intellij.language.psi.VomlTypes
+import com.github.voml.voml_intellij.language.psi.VomlTypes.*
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
@@ -21,36 +20,36 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
     private fun getTokenColor(tokenType: IElementType): VomlColor? {
         return when (tokenType) {
             //
-            VomlTypes.INCLUDE, VomlTypes.INHERIT, VomlTypes.AS -> VomlColor.KEYWORD
-            VomlTypes.ANNOTATION, VomlTypes.ANNOTATION_MARK -> VomlColor.ANNOTATION
-            VomlTypes.PREDEFINED_SYMBOL -> VomlColor.PREDEFINED
+            INCLUDE, INHERIT, AS -> VomlColor.KEYWORD
+            ANNOTATION, ANNOTATION_MARK -> VomlColor.ANNOTATION
+            PREDEFINED_SYMBOL -> VomlColor.PREDEFINED
             //
-            VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
-            VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
-            VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
-            VomlTypes.INSERT_DOT, VomlTypes.INSERT_STAR -> VomlColor.INSERT_MARK
+            STRING_PREFIX -> VomlColor.STRING_HINT
+            NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
+            TYPE_HINT -> VomlColor.TYPE_HINT
+            INSERT_DOT, INSERT_STAR -> VomlColor.INSERT_MARK
             //
-            VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
-            VomlTypes.BRACKET_L, VomlTypes.BRACKET_R -> VomlColor.BRACKETS
-            VomlTypes.BRACE_L, VomlTypes.BRACE_R -> VomlColor.BRACES
-            VomlTypes.COLON, VomlTypes.EQ -> VomlColor.SET
-            VomlTypes.COMMA -> VomlColor.COMMA
+            PARENTHESIS_L, PARENTHESIS_R -> VomlColor.PARENTHESES
+            BRACKET_L, BRACKET_R -> VomlColor.BRACKETS
+            BRACE_L, BRACE_R -> VomlColor.BRACES
+            COLON, EQ -> VomlColor.SET
+            COMMA -> VomlColor.COMMA
             // atom
-            VomlTypes.NULL -> VomlColor.NULL
-            VomlTypes.BOOLEAN -> VomlColor.BOOLEAN
+            NULL -> VomlColor.NULL
+            BOOLEAN -> VomlColor.BOOLEAN
 
-            VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
-            VomlTypes.INTEGER -> VomlColor.INTEGER
-            VomlTypes.DECIMAL -> VomlColor.DECIMAL
+            NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
+            INTEGER -> VomlColor.INTEGER
+            DECIMAL -> VomlColor.DECIMAL
 
-            VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
-            VomlTypes.STRING_INLINE -> VomlColor.STRING
-            VomlTypes.STRING_MULTI -> VomlColor.STRING
+            STRING_PREFIX -> VomlColor.STRING_HINT
+            STRING_INLINE -> VomlColor.STRING
+            STRING_MULTI -> VomlColor.STRING
 
-            VomlTypes.SYMBOL -> getSymbolColor(tokenType)
+            SYMBOL -> getSymbolColor(tokenType)
             // 注释
-            VomlTypes.COMMENT -> VomlColor.LINE_COMMENT
-            VomlTypes.BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
+            COMMENT -> VomlColor.LINE_COMMENT
+            BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
             // 错误
             TokenType.BAD_CHARACTER -> VomlColor.BAD_CHARACTER
             else -> null

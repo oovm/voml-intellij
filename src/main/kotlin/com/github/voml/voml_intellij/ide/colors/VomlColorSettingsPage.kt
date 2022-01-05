@@ -19,14 +19,14 @@ class VomlColorSettingsPage : ColorSettingsPage {
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() =  VomlBundle.message("filetype.voml.name")
+    override fun getDisplayName() = VomlBundle.message("filetype.voml.name")
 
     override fun getIcon() = VomlIcons.FILE
 
     override fun getHighlighter() = VomlSyntaxHighlighter()
 
     override fun getDemoText() =
-"""<KEYWORD>@inherit</KEYWORD> <PREDEFINED>user</PREDEFINED>;
+        """<KEYWORD>@inherit</KEYWORD> <PREDEFINED>user</PREDEFINED>;
 
 <KEYWORD>@include</KEYWORD> <STRING_HINT>json</STRING_HINT> <STRING>"some/path/test.json"</STRING> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>json</KEY_SYMBOL>;
 <KEYWORD>@include</KEYWORD> <STRING>"https://example.org/test.voml"</STRING> {
