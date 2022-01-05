@@ -38,11 +38,11 @@ key = null
 
 connection_max.a = 5cm
 v."s" = [
-  @merge(override)
-  @merge_as_source(unset)
-  @merge_as_target(ignore)
+  @merge("override")
+  @merge_as_source("unset")
+  @merge_as_target("ignore")
   a = Some(1)
-    b = None()
+  b = None()
 ]
 
 [name]

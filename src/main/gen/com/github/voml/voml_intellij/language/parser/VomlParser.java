@@ -214,26 +214,26 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // scope_symbol AS scope_symbol | scope_symbol
+  // key_symbol AS key_symbol | key_symbol
   static boolean include_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "include_item")) return false;
     if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = include_item_0(b, l + 1);
-    if (!r) r = scope_symbol(b, l + 1);
+    if (!r) r = key_symbol(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // scope_symbol AS scope_symbol
+  // key_symbol AS key_symbol
   private static boolean include_item_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "include_item_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = scope_symbol(b, l + 1);
+    r = key_symbol(b, l + 1);
     r = r && consumeToken(b, AS);
-    r = r && scope_symbol(b, l + 1);
+    r = r && key_symbol(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -866,14 +866,14 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [table_item (COMMA table_item)* [COMMA]]
+  // [table_item ([COMMA] table_item)* [COMMA]]
   static boolean table_inner(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "table_inner")) return false;
     table_inner_0(b, l + 1);
     return true;
   }
 
-  // table_item (COMMA table_item)* [COMMA]
+  // table_item ([COMMA] table_item)* [COMMA]
   private static boolean table_inner_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "table_inner_0")) return false;
     boolean r;
@@ -885,7 +885,7 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (COMMA table_item)*
+  // ([COMMA] table_item)*
   private static boolean table_inner_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "table_inner_0_1")) return false;
     while (true) {
@@ -896,15 +896,22 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // COMMA table_item
+  // [COMMA] table_item
   private static boolean table_inner_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "table_inner_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
+    r = table_inner_0_1_0_0(b, l + 1);
     r = r && table_item(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // [COMMA]
+  private static boolean table_inner_0_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "table_inner_0_1_0_0")) return false;
+    consumeToken(b, COMMA);
+    return true;
   }
 
   // [COMMA]

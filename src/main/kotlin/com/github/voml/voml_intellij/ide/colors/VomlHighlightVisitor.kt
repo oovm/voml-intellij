@@ -13,47 +13,29 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
 
-    override fun visitInheritStatement(o: VomlInheritStatement) {
-        for (symbol in o.children) {
-            val color = when (symbol) {
-                is VomlPredefinedSymbol -> VomlColor.PREDEFINED
-                is VomlStringPrefix -> VomlColor.STRING_HINT
-                else -> null
-            }
-            if (color != null) {
-                highlight(symbol, color)
-            }
-        }
-        super.visitInheritStatement(o)
+    override fun visitPredefinedSymbol(o: VomlPredefinedSymbol) {
+        highlight(o, VomlColor.PREDEFINED)
     }
 
-    override fun visitIncludeStatement(o: VomlIncludeStatement) {
-        for (symbol in o.children) {
-            val color = when (symbol) {
-                is VomlKeySymbol -> VomlColor.KEY_SYMBOL
-                is VomlStringPrefix -> VomlColor.STRING_HINT
-                else -> null
-            }
-            if (color != null) {
-                highlight(symbol, color)
-            }
-        }
-        super.visitIncludeStatement(o)
+    override fun visitScopeSymbol(o: VomlScopeSymbol) {
+        highlight(o, VomlColor.SCOPE_SYMBOL)
     }
 
-    override fun visitScope(o: VomlScope) {
-        for (symbol in o.children) {
-            val color = when (symbol) {
-                is VomlScopeSymbol -> VomlColor.SCOPE_SYMBOL
-                else -> null
-            }
-            if (color != null) {
-                highlight(symbol, color)
-            }
-        }
-        super.visitScope(o)
+    override fun visitKeySymbol(o: VomlKeySymbol) {
+        highlight(o, VomlColor.KEY_SYMBOL)
     }
 
+    override fun visitStringPrefix(o: VomlStringPrefix) {
+        highlight(o, VomlColor.STRING_HINT)
+    }
+
+    override fun visitNumberSuffix(o: VomlNumberSuffix) {
+        highlight(o, VomlColor.NUMBER_HINT)
+    }
+
+    override fun visitAnnotationMark(o: VomlAnnotationMark) {
+        highlight(o, VomlColor.ANNOTATION)
+    }
 
     override fun visitInsertPair(o: VomlInsertPair) {
         for (symbol in o.children) {
@@ -81,20 +63,6 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
             }
         }
         super.visitInsertItem(o)
-    }
-
-
-    override fun visitSymbolPath(o: VomlSymbolPath) {
-        for (symbol in o.children) {
-            val color = when (symbol) {
-                is VomlKeySymbol -> VomlColor.KEY_SYMBOL
-                else -> null
-            }
-            if (color != null) {
-                highlight(symbol, color)
-            }
-        }
-        super.visitSymbolPath(o)
     }
 
     private fun highlight(element: PsiElement, color: VomlColor) {

@@ -121,7 +121,7 @@ annotation ::= annotation_mark <<paired table_inner>>;
 annotation_mark ::= AT SYMBOL;
 // ------------------------------------
 table ::= [type_hint] <<paired table_inner>>;
-private table_inner ::= [table_item (COMMA table_item)* [COMMA]];
+private table_inner ::= [table_item ([COMMA] table_item)* [COMMA]];
 private table_item ::= pair | value;
 // ------------------------------------
 private meta paired ::=
