@@ -67,10 +67,6 @@ public class VomlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPaired(@NotNull VomlPaired o) {
-    visitPsiElement(o);
-  }
-
   public void visitPredefinedSymbol(@NotNull VomlPredefinedSymbol o) {
     visitPsiElement(o);
   }

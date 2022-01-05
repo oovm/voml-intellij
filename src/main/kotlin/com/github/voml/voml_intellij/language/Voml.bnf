@@ -77,7 +77,7 @@ export_statement ::= EXPORT [string_prefix] string_inline;
 // ------------------------------------
 inherit_statement ::= INHERIT (predefined_symbol | [string_prefix] string_inline);
 predefined_symbol ::= SYMBOL;
-// -------------------------------G-----
+// -------------------------------------
 include_statement ::= INCLUDE [string_prefix] string_inline (AS key_symbol | <<paired include_inner>>);
 private include_inner ::= key_symbol*;
 
@@ -123,7 +123,7 @@ table ::= [type_hint] <<paired table_inner>>;
 private table_inner ::= [table_item (COMMA table_item)* [COMMA]];
 private table_item ::= pair | value;
 // ------------------------------------
-meta paired ::=
+private meta paired ::=
     PARENTHESIS_L <<param>> PARENTHESIS_R
   | BRACKET_L <<param>> BRACKET_R
   | BRACE_L <<param>> BRACE_R

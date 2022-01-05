@@ -28,15 +28,9 @@ public class VomlIncludeStatementImpl extends ASTWrapperPsiElement implements Vo
   }
 
   @Override
-  @Nullable
-  public VomlKeySymbol getKeySymbol() {
-    return findChildByClass(VomlKeySymbol.class);
-  }
-
-  @Override
-  @Nullable
-  public VomlPaired getPaired() {
-    return findChildByClass(VomlPaired.class);
+  @NotNull
+  public List<VomlKeySymbol> getKeySymbolList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlKeySymbol.class);
   }
 
   @Override

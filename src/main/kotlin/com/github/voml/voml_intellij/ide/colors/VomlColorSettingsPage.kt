@@ -1,6 +1,5 @@
 package com.github.voml.voml_intellij.ide.colors
 
-import com.github.voml.voml_intellij.ide.VomlSyntaxHighlighter
 import com.github.voml.voml_intellij.ide.icons.VomlIcons
 import com.github.voml.voml_intellij.language.VomlBundle
 import com.intellij.openapi.options.colors.ColorDescriptor

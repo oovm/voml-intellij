@@ -40,12 +40,12 @@ NON_ESCAPE=[^\\]
 <YYINITIAL> {
   {WHITE_SPACE}        { return WHITE_SPACE; }
 
-  "null"               { return NULL; }
   "@include"           { return INCLUDE; }
   "@inherit"           { return INHERIT; }
   "@import"            { return IMPORT; }
   "@export"            { return EXPORT; }
   "as"                 { return AS; }
+  "null"               { return NULL; }
   "("                  { return PARENTHESIS_L; }
   ")"                  { return PARENTHESIS_R; }
   "["                  { return BRACKET_L; }

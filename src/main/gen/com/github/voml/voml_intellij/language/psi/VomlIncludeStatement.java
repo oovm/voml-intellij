@@ -7,11 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface VomlIncludeStatement extends PsiElement {
 
-  @Nullable
-  VomlKeySymbol getKeySymbol();
-
-  @Nullable
-  VomlPaired getPaired();
+  @NotNull
+  List<VomlKeySymbol> getKeySymbolList();
 
   @NotNull
   VomlStringInline getStringInline();

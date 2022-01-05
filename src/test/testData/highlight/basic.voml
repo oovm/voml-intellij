@@ -37,7 +37,7 @@ key = null
 --- // 返回顶级
 
 connection_max.a = 5cm
-v = [
+v."s" = [
 	@merge(override)
 	@merge_as_source(unset)
 	@merge_as_target(ignore)

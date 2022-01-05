@@ -29,14 +29,20 @@ public class VomlTableImpl extends ASTWrapperPsiElement implements VomlTable {
 
   @Override
   @NotNull
-  public VomlPaired getPaired() {
-    return findNotNullChildByClass(VomlPaired.class);
+  public List<VomlPair> getPairList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlPair.class);
   }
 
   @Override
   @Nullable
   public VomlTypeHint getTypeHint() {
     return findChildByClass(VomlTypeHint.class);
+  }
+
+  @Override
+  @NotNull
+  public List<VomlValue> getValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlValue.class);
   }
 
 }

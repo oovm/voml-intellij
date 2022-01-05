@@ -28,9 +28,13 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
                 language="VOML"
                 implementationClass="com.github.voml.voml_intellij.language.VomlParserDefinition"
         />
+        <lang.highlightVisitor
+                language="VOML"
+                implementationClass="com.github.voml.voml_intellij.ide.colors.VomlHighlightVisitor"
+        />
         <lang.syntaxHighlighter
                 language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.VomlSyntaxHighlighter"
+                implementationClass="com.github.voml.voml_intellij.ide.colors.VomlSyntaxHighlighter"
         />
         <colorSettingsPage
                 implementation="com.github.voml.voml_intellij.ide.colors.VomlColorSettingsPage"

@@ -1,4 +1,4 @@
-package com.github.voml.voml_intellij.ide
+package com.github.voml.voml_intellij.ide.colors
 
 import com.github.voml.voml_intellij.ide.colors.VomlColor
 import com.github.voml.voml_intellij.language.VomlLexerAdapter
@@ -28,8 +28,6 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.STRING_PREFIX -> VomlColor.STRING_HINT
             VomlTypes.NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             VomlTypes.TYPE_HINT -> VomlColor.TYPE_HINT
-            VomlTypes.SCOPE_SYMBOL -> VomlColor.SCOPE_SYMBOL
-            VomlTypes.SCOPE_MARK -> VomlColor.SCOPE_MARK
             VomlTypes.INSERT_DOT, VomlTypes.INSERT_STAR -> VomlColor.INSERT_MARK
             //
             VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R -> VomlColor.PARENTHESES
@@ -49,7 +47,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             VomlTypes.STRING_INLINE -> VomlColor.STRING
             VomlTypes.STRING_MULTI -> VomlColor.STRING
 
-            VomlTypes.SYMBOL -> VomlColor.IDENTIFIER
+            VomlTypes.SYMBOL -> getSymbolColor(tokenType)
             // 注释
             VomlTypes.COMMENT -> VomlColor.LINE_COMMENT
             VomlTypes.BLOCK_COMMENT -> VomlColor.BLOCK_COMMENT
@@ -57,5 +55,9 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             TokenType.BAD_CHARACTER -> VomlColor.BAD_CHARACTER
             else -> null
         }
+    }
+
+    private fun getSymbolColor(symbol: IElementType): VomlColor? {
+        return null
     }
 }

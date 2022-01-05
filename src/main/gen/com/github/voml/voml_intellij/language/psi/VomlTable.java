@@ -8,9 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface VomlTable extends PsiElement {
 
   @NotNull
-  VomlPaired getPaired();
+  List<VomlPair> getPairList();
 
   @Nullable
   VomlTypeHint getTypeHint();
+
+  @NotNull
+  List<VomlValue> getValueList();
 
 }
