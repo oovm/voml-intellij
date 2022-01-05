@@ -28,8 +28,8 @@ class VomlColorSettingsPage : ColorSettingsPage {
     override fun getDemoText() =
 """<KEYWORD>@inherit</KEYWORD> <PREDEFINED>user</PREDEFINED>;
 
-@include <STRING_HINT>json</STRING_HINT> <STRING>"some/path/test.json"</STRING> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>json</KEY_SYMBOL>;
-@include <STRING>"https://example.org/test.voml"</STRING> {
+<KEYWORD>@include</KEYWORD> <STRING_HINT>json</STRING_HINT> <STRING>"some/path/test.json"</STRING> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>json</KEY_SYMBOL>;
+<KEYWORD>@include</KEYWORD> <STRING>"https://example.org/test.voml"</STRING> {
 	<KEY_SYMBOL>external_key</KEY_SYMBOL> <KEYWORD>as</KEYWORD> <KEY_SYMBOL>external</KEY_SYMBOL>
 }
 

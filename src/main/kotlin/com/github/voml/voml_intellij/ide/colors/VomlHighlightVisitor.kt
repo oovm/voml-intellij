@@ -41,8 +41,47 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
         super.visitScope(o)
     }
 
-    override fun visitKeySymbol(o: VomlKeySymbol) {
-        super.visitKeySymbol(o)
+
+    override fun visitInsertPair(o: VomlInsertPair) {
+        for (symbol in o.children) {
+            val color = when (symbol) {
+                is VomlInsertDot -> VomlColor.INSERT_MARK
+                is VomlInsertStar -> VomlColor.INSERT_MARK
+                else -> null
+            }
+            if (color != null) {
+                highlight(symbol, color)
+            }
+        }
+        super.visitInsertPair(o)
+    }
+
+    override fun visitInsertItem(o: VomlInsertItem) {
+        for (symbol in o.children) {
+            val color = when (symbol) {
+                is VomlInsertDot -> VomlColor.INSERT_MARK
+                is VomlInsertStar -> VomlColor.INSERT_MARK
+                else -> null
+            }
+            if (color != null) {
+                highlight(symbol, color)
+            }
+        }
+        super.visitInsertItem(o)
+    }
+
+
+    override fun visitSymbolPath(o: VomlSymbolPath) {
+        for (symbol in o.children) {
+            val color = when (symbol) {
+                is VomlKeySymbol -> VomlColor.KEY_SYMBOL
+                else -> null
+            }
+            if (color != null) {
+                highlight(symbol, color)
+            }
+        }
+        super.visitSymbolPath(o)
     }
 
     private fun highlight(element: PsiElement, color: VomlColor) {

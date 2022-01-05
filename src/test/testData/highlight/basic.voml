@@ -2,7 +2,7 @@
 
 @include json "some/path/test.json" as json;
 @include "https://example.org/test.voml" {
-	external_key as external
+  external_key as external
 }
 
 [literals]
@@ -21,32 +21,32 @@ escape   = "\n"
 key = null
 
 [scopes]
-	[>a1] // 增加层级
-	key1 = "scopes.a1.key1"
-	[^a2] // 维持层级
-	key2 = "scopes.a2.key2"
-		[>b1]
-		key3 = "a.a2.b1.key3"
-	[<] // 减少层级
-	key4 = "scopes.a2.key4"
-		[>b1]
-		key5 = "a.a2.b1.key5"
-	[<a3]  // 同 [<][^a2]
-	key = "scopes.a3.key"
+  [>a1] // 增加层级
+  key1 = "scopes.a1.key1"
+  [^a2] // 维持层级
+  key2 = "scopes.a2.key2"
+    [>b1]
+    key3 = "a.a2.b1.key3"
+  [<] // 减少层级
+  key4 = "scopes.a2.key4"
+    [>b1]
+    key5 = "a.a2.b1.key5"
+  [<a3]  // 同 [<][^a2]
+  key = "scopes.a3.key"
 
 --- // 返回顶级
 
 connection_max.a = 5cm
 v."s" = [
-	@merge(override)
-	@merge_as_source(unset)
-	@merge_as_target(ignore)
-	a = Some(1)
+  @merge(override)
+  @merge_as_source(unset)
+  @merge_as_target(ignore)
+  a = Some(1)
     b = None()
 ]
 
 [name]
-  . a = 2
-  * a
-  * b
+. a = 2
+* a
+* b
 
