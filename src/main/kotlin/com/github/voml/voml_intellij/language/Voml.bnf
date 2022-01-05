@@ -81,7 +81,7 @@ predefined_symbol ::= SYMBOL;
 // -------------------------------------
 include_statement ::= INCLUDE [string_prefix] string_inline (AS key_symbol | <<paired include_inner>>);
 private include_inner ::= [include_item (COMMA include_item)* [COMMA]];
-private include_item ::= scope_symbol AS scope_symbol | scope_symbol;
+private include_item ::= key_symbol AS key_symbol | key_symbol;
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
 private scope_inner ::=

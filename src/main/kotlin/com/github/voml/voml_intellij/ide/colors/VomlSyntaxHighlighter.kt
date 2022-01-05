@@ -27,6 +27,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
             STRING_PREFIX -> VomlColor.STRING_HINT
             NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             TYPE_HINT -> VomlColor.TYPE_HINT
+            BACK_TOP, ANGLE_L, ANGLE_R, ACCENT -> VomlColor.SCOPE_MARK
             INSERT_DOT, INSERT_STAR -> VomlColor.INSERT_MARK
             //
             PARENTHESIS_L, PARENTHESIS_R -> VomlColor.PARENTHESES

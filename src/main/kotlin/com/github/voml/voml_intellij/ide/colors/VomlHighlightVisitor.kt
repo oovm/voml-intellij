@@ -27,11 +27,24 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
         super.visitInheritStatement(o)
     }
 
+    override fun visitIncludeStatement(o: VomlIncludeStatement) {
+        for (symbol in o.children) {
+            val color = when (symbol) {
+                is VomlKeySymbol -> VomlColor.KEY_SYMBOL
+                is VomlStringPrefix -> VomlColor.STRING_HINT
+                else -> null
+            }
+            if (color != null) {
+                highlight(symbol, color)
+            }
+        }
+        super.visitIncludeStatement(o)
+    }
+
     override fun visitScope(o: VomlScope) {
         for (symbol in o.children) {
             val color = when (symbol) {
                 is VomlScopeSymbol -> VomlColor.SCOPE_SYMBOL
-                is VomlScopeMark -> VomlColor.SCOPE_MARK
                 else -> null
             }
             if (color != null) {

@@ -34,7 +34,7 @@ key = null
   [<a3]  // 同 [<][^a2]
   key = "scopes.a3.key"
 
---- // 返回顶级
+------ // 返回顶级
 
 connection_max.a = 5cm
 v."s" = [
