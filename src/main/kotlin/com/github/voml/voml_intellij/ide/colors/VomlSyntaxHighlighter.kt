@@ -41,7 +41,7 @@ class VomlSyntaxHighlighter : SyntaxHighlighterBase() {
 
             NUMBER_SUFFIX -> VomlColor.NUMBER_HINT
             INTEGER -> VomlColor.INTEGER
-            DECIMAL -> VomlColor.DECIMAL
+            DECIMAL, DECIMAL_BAD -> VomlColor.DECIMAL
 
             STRING_PREFIX -> VomlColor.STRING_HINT
             STRING, STRING_INLINE, STRING_MULTI -> VomlColor.STRING

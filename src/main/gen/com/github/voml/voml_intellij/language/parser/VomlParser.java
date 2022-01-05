@@ -48,14 +48,97 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // annotation_mark <<paired table_inner>>
+  // [anno_item (COMMA anno_item)* [COMMA]]
+  static boolean anno_inner(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_inner")) return false;
+    anno_inner_0(b, l + 1);
+    return true;
+  }
+
+  // anno_item (COMMA anno_item)* [COMMA]
+  private static boolean anno_inner_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_inner_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = anno_item(b, l + 1);
+    r = r && anno_inner_0_1(b, l + 1);
+    r = r && anno_inner_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (COMMA anno_item)*
+  private static boolean anno_inner_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_inner_0_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!anno_inner_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "anno_inner_0_1", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA anno_item
+  private static boolean anno_inner_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_inner_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && anno_item(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // [COMMA]
+  private static boolean anno_inner_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_inner_0_2")) return false;
+    consumeToken(b, COMMA);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // key_symbol EQ anno_value | anno_value
+  static boolean anno_item(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_item")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = anno_item_0(b, l + 1);
+    if (!r) r = anno_value(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // key_symbol EQ anno_value
+  private static boolean anno_item_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_item_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = key_symbol(b, l + 1);
+    r = r && consumeToken(b, EQ);
+    r = r && anno_value(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // value | predefined_symbol
+  static boolean anno_value(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anno_value")) return false;
+    boolean r;
+    r = value(b, l + 1);
+    if (!r) r = predefined_symbol(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // annotation_mark <<paired anno_inner>>
   public static boolean annotation(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "annotation")) return false;
     if (!nextTokenIs(b, AT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = annotation_mark(b, l + 1);
-    r = r && paired(b, l + 1, VomlParser::table_inner);
+    r = r && paired(b, l + 1, VomlParser::anno_inner);
     exit_section_(b, m, ANNOTATION, r);
     return r;
   }
@@ -404,19 +487,18 @@ public class VomlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num
+  // [SIGN] (INTEGER | DECIMAL | DECIMAL_BAD) [number_suffix] | [SIGN] BYTE
   static boolean num(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "num")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = num_0(b, l + 1);
     if (!r) r = num_1(b, l + 1);
-    if (!r) r = other_num(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // [SIGN] (INTEGER | DECIMAL) [number_suffix]
+  // [SIGN] (INTEGER | DECIMAL | DECIMAL_BAD) [number_suffix]
   private static boolean num_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "num_0")) return false;
     boolean r;
@@ -435,12 +517,13 @@ public class VomlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // INTEGER | DECIMAL
+  // INTEGER | DECIMAL | DECIMAL_BAD
   private static boolean num_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "num_0_1")) return false;
     boolean r;
     r = consumeToken(b, INTEGER);
     if (!r) r = consumeToken(b, DECIMAL);
+    if (!r) r = consumeToken(b, DECIMAL_BAD);
     return r;
   }
 
@@ -479,12 +562,6 @@ public class VomlParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, SYMBOL);
     exit_section_(b, m, NUMBER_SUFFIX, r);
     return r;
-  }
-
-  /* ********************************************************** */
-  // NAN
-  static boolean other_num(PsiBuilder b, int l) {
-    return consumeToken(b, NAN);
   }
 
   /* ********************************************************** */

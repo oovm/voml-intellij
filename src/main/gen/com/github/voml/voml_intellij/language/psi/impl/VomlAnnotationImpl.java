@@ -35,8 +35,14 @@ public class VomlAnnotationImpl extends ASTWrapperPsiElement implements VomlAnno
 
   @Override
   @NotNull
-  public List<VomlPair> getPairList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlPair.class);
+  public List<VomlKeySymbol> getKeySymbolList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlKeySymbol.class);
+  }
+
+  @Override
+  @NotNull
+  public List<VomlPredefinedSymbol> getPredefinedSymbolList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, VomlPredefinedSymbol.class);
   }
 
   @Override

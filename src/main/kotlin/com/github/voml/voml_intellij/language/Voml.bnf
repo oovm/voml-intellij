@@ -32,7 +32,8 @@
         STRING = 'regexp:"([^"\\]|\\.)*"'
         BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
-        DECIMAL = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
+        DECIMAL = 'regexp:[0-9]+\.[0-9]+([eE][+-][0-9]+)?'
+//      DECIMAL_BAD = 'regexp:([0-9]+\.([eE][+-][0-9]+)?)|(\.[0-9]+([Ee][+-][0-9]+)?)'
         SIGN = 'regexp:[+-]'
         BACK_TOP = 'regexp:[-][-][-]+' // [-]{3,}
 
@@ -106,8 +107,7 @@ type_hint ::= SYMBOL;
 string_prefix ::= SYMBOL;
 number_suffix ::= SYMBOL;
 // ------------------------------------
-private num ::= [SIGN] (INTEGER | DECIMAL) [number_suffix] | [SIGN] BYTE | other_num;
-private other_num ::= NAN;
+private num ::= [SIGN] (INTEGER | DECIMAL | DECIMAL_BAD) [number_suffix] | [SIGN] BYTE;
 // ------------------------------------
 private str ::= [string_prefix] (string_inline|string_multi);
 string_inline ::= STRING;
@@ -117,8 +117,11 @@ escaped ::= ESCAPE (ESCAPE|NON_ESCAPE);
 // ------------------------------------
 ref ::= CITE symbol_path;
 // ------------------------------------
-annotation ::= annotation_mark <<paired table_inner>>;
+annotation ::= annotation_mark <<paired anno_inner>>;
 annotation_mark ::= AT SYMBOL;
+private anno_inner ::= [anno_item (COMMA anno_item)* [COMMA]];
+private anno_item  ::= key_symbol EQ anno_value | anno_value;
+private anno_value ::= value | predefined_symbol;
 // ------------------------------------
 table ::= [type_hint] <<paired table_inner>>;
 private table_inner ::= [table_item ([COMMA] table_item)* [COMMA]];

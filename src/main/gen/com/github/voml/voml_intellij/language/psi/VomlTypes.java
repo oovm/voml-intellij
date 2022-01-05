@@ -52,6 +52,7 @@ public interface VomlTypes {
   IElementType COMMA = new VomlTokenType(",");
   IElementType COMMENT = new VomlTokenType("COMMENT");
   IElementType DECIMAL = new VomlTokenType("DECIMAL");
+  IElementType DECIMAL_BAD = new VomlTokenType("DECIMAL_BAD");
   IElementType DOT = new VomlTokenType(".");
   IElementType EQ = new VomlTokenType("=");
   IElementType ESCAPE = new VomlTokenType("\\");

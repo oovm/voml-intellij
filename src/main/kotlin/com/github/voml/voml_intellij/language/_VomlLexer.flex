@@ -32,7 +32,7 @@ SYMBOL=[A-Za-z_][A-Za-z0-9_]*
 STRING=\"([^\"\\]|\\.)*\"
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
-DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
+DECIMAL=[0-9]+\.[0-9]+([eE][+-][0-9]+)?
 SIGN=[+-]
 BACK_TOP=[-][-][-]+
 NON_ESCAPE=[^\\]
@@ -67,6 +67,7 @@ NON_ESCAPE=[^\\]
   "."                  { return DOT; }
   "*"                  { return STAR; }
   "@"                  { return AT; }
+  "DECIMAL_BAD"        { return DECIMAL_BAD; }
 
   {COMMENT}            { return COMMENT; }
   {BLOCK_COMMENT}      { return BLOCK_COMMENT; }

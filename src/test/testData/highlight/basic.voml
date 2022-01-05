@@ -9,12 +9,12 @@
 boolean = [true, false]
 
 [literals.number]
-integer  = 10cm
-decimal  = 0.1m
+integer = 10cm
+decimal = 0.1m
 
 [literals.string]
-string   = "string"
-escape   = "\n"
+string  = "string"
+escape  = "\n"
 
 [keywords]
 // remove this key-value pair
@@ -36,17 +36,36 @@ key = null
 
 ------ // 返回顶级
 
-connection_max.a = 5cm
-v."s" = [
-  @merge("override")
-  @merge_as_source("unset")
-  @merge_as_target("ignore")
+mergable = [
+  @merge(override)
+  @merge_as_source(unset)
+  @merge_as_target(ignore)
   a = Some(1)
   b = None()
 ]
 
 [name]
 . a = 2
-* a
-* b
+* $name.a
+* $name.1
 
+---
+
+VON =
+{
+    integer = [-1, 0, +1],
+    decimal = 0.0,
+    byte    = 0x64,
+    string  = "1",
+    option  = {
+      some  = Some(0),
+      none  = Null(),
+    },
+    map     = {
+
+    }
+    struct  = Struct {
+       field = 2
+    }
+
+}

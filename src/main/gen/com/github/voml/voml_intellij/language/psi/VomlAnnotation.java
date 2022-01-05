@@ -11,7 +11,10 @@ public interface VomlAnnotation extends PsiElement {
   VomlAnnotationMark getAnnotationMark();
 
   @NotNull
-  List<VomlPair> getPairList();
+  List<VomlKeySymbol> getKeySymbolList();
+
+  @NotNull
+  List<VomlPredefinedSymbol> getPredefinedSymbolList();
 
   @NotNull
   List<VomlValue> getValueList();

@@ -33,6 +33,10 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
         highlight(o, VomlColor.NUMBER_HINT)
     }
 
+    override fun visitTypeHint(o: VomlTypeHint) {
+        highlight(o, VomlColor.TYPE_HINT)
+    }
+
     override fun visitAnnotationMark(o: VomlAnnotationMark) {
         highlight(o, VomlColor.ANNOTATION)
     }
