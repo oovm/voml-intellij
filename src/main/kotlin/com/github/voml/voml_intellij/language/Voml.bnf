@@ -80,7 +80,6 @@ predefined_symbol ::= SYMBOL;
 // -------------------------------------
 include_statement ::= INCLUDE [string_prefix] string_inline (AS key_symbol | <<paired include_inner>>);
 private include_inner ::= key_symbol*;
-
 // ------------------------------------
 scope ::= <<paired scope_inner>>;
 private scope_inner ::= [scope_mark] scope_path;

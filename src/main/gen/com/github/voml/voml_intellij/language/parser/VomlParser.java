@@ -453,14 +453,14 @@ public class VomlParser implements PsiParser, LightPsiParser {
   // PARENTHESIS_L <<param>> PARENTHESIS_R
   //   | BRACKET_L <<param>> BRACKET_R
   //   | BRACE_L <<param>> BRACE_R
-  public static boolean paired(PsiBuilder b, int l, Parser _param) {
+  static boolean paired(PsiBuilder b, int l, Parser _param) {
     if (!recursion_guard_(b, l, "paired")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = paired_0(b, l + 1, _param);
     if (!r) r = paired_1(b, l + 1, _param);
     if (!r) r = paired_2(b, l + 1, _param);
-    exit_section_(b, m, PAIRED, r);
+    exit_section_(b, m, null, r);
     return r;
   }
 

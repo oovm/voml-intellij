@@ -14,82 +14,79 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-<!--    <depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
+    <!--    <depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
     <resource-bundle>messages.VomlBundle</resource-bundle>
     <extensions defaultExtensionNs="com.intellij">
         <fileType
-                name="VOML"
-                implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
-                fieldName="INSTANCE"
-                language="VOML"
-                extensions="voml"
+            name="VOML"
+            implementationClass="com.github.voml.voml_intellij.language.VomlFileType"
+            fieldName="INSTANCE"
+            language="VOML"
+            extensions="voml"
         />
         <lang.parserDefinition
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.language.VomlParserDefinition"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.language.VomlParserDefinition"
         />
-        <lang.highlightVisitor
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.colors.VomlHighlightVisitor"
-        />
+        <!-- Highlight -->
+        <colorSettingsPage implementation="com.github.voml.voml_intellij.ide.colors.VomlColorSettingsPage"/>
+        <highlightVisitor implementation="com.github.voml.voml_intellij.ide.colors.VomlHighlightVisitor"/>
         <lang.syntaxHighlighter
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.colors.VomlSyntaxHighlighter"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.colors.VomlSyntaxHighlighter"
         />
-        <colorSettingsPage
-                implementation="com.github.voml.voml_intellij.ide.colors.VomlColorSettingsPage"
-        />
+        <!-- commenter -->
         <lang.commenter
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.VomlCommenter"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.VomlCommenter"
         />
         <lang.braceMatcher
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.braces.VomlBraceMatcher"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.braces.VomlBraceMatcher"
         />
         <lang.quoteHandler
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.VomlQuoteHandler"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.VomlQuoteHandler"
         />
         <lang.foldingBuilder
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.folding.VomlFoldingBuilder"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.folding.VomlFoldingBuilder"
         />
         <indexPatternBuilder
-                implementation="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexPatternBuilder"
+            implementation="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexPatternBuilder"
         />
         <todoIndexer
-                filetype="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexer"
+            filetype="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.todo.VomlTodoIndexer"
         />
         <completion.contributor
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.completion.VomlOptionCompletionContributor"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.completion.VomlOptionCompletionContributor"
         />
         <annotator
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlHighlightingAnnotator"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlHighlightingAnnotator"
         />
         <annotator
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlScopeCheckerAnnotator"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlScopeCheckerAnnotator"
         />
         <annotator
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlTableCheckerAnnotator"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlTableCheckerAnnotator"
         />
         <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
         <langCodeStyleSettingsProvider
-                implementation="com.github.voml.voml_intellij.ide.codeStyle.VomlLanguageCodeStyleSettingsProvider"
+            implementation="com.github.voml.voml_intellij.ide.codeStyle.VomlLanguageCodeStyleSettingsProvider"
         />
         <lang.formatter
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.formatter.VomlFormattingModelBuilder"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.formatter.VomlFormattingModelBuilder"
         />
         <lang.smartEnterProcessor
-                language="VOML"
-                implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
+            language="VOML"
+            implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
         />
     </extensions>
     <actions>

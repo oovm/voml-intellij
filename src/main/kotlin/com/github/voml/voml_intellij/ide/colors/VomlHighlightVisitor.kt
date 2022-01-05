@@ -12,6 +12,21 @@ import com.intellij.psi.PsiFile
 class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
+
+    override fun visitInheritStatement(o: VomlInheritStatement) {
+        for (symbol in o.children) {
+            val color = when (symbol) {
+                is VomlPredefinedSymbol -> VomlColor.PREDEFINED
+                is VomlStringPrefix -> VomlColor.STRING_HINT
+                else -> null
+            }
+            if (color != null) {
+                highlight(symbol, color)
+            }
+        }
+        super.visitInheritStatement(o)
+    }
+
     override fun visitScope(o: VomlScope) {
         for (symbol in o.children) {
             val color = when (symbol) {
@@ -39,7 +54,10 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
     }
 
     override fun analyze(
-        file: PsiFile, updateWholeFile: Boolean, holder: HighlightInfoHolder, action: Runnable
+        file: PsiFile,
+        updateWholeFile: Boolean,
+        holder: HighlightInfoHolder,
+        action: Runnable
     ): Boolean {
         infoHolder = holder
         action.run()
