@@ -6,16 +6,14 @@ import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 
 class VomlColorSettingsPage : ColorSettingsPage {
-    private val attrs = VomlColor
-        .values()
-        .map { it.attributesDescriptor }
-        .toTypedArray()
-
     private val annotatorTags = VomlColor
         .values()
         .associateBy({ it.name }, { it.textAttributesKey })
 
-    override fun getAttributeDescriptors() = attrs
+    override fun getAttributeDescriptors() = VomlColor
+        .values()
+        .map { it.attributesDescriptor }
+        .toTypedArray()
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
@@ -24,6 +22,8 @@ class VomlColorSettingsPage : ColorSettingsPage {
     override fun getIcon() = VomlIcons.FILE
 
     override fun getHighlighter() = VomlSyntaxHighlighter()
+
+    override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
 
     override fun getDemoText() =
         """<KEYWORD>@inherit</KEYWORD> <PREDEFINED>user</PREDEFINED>;
@@ -74,5 +74,5 @@ class VomlColorSettingsPage : ColorSettingsPage {
   <INSERT_MARK>*</INSERT_MARK> [true]
 """
 
-    override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
+
 }
