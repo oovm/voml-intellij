@@ -28,7 +28,7 @@
         NULL = 'null'
         BOOLEAN = 'regexp:true|false'
 
-        SYMBOL = 'regexp:[A-Za-z_][A-Za-z0-9_]*'
+        SYMBOL = 'regexp:[\p{XID_Start}_][\p{XID_Continue}_]*'
         STRING = 'regexp:"([^"\\]|\\.)*"'
         BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
         INTEGER = 'regexp:(0|[1-9][0-9_]*)'
