@@ -16,4 +16,7 @@ public interface VomlInheritStatement extends PsiElement {
   @Nullable
   VomlStringPrefix getStringPrefix();
 
+  @NotNull
+  PsiElement getInherit();
+
 }

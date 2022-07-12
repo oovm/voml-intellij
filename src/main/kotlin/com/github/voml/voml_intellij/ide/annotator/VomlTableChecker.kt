@@ -1,11 +1,11 @@
-package com.github.voml.voml_intellij.ide.annotator.checkers
+package com.github.voml.voml_intellij.ide.annotator
 
 import com.github.voml.voml_intellij.language.psi.VomlPair
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.psi.PsiElement
 
 
-class VomlTableCheckerAnnotator : CheckerAnnotator() {
+class VomlTableChecker : CheckerBase() {
     override fun check(element: PsiElement, holder: AnnotationHolder): CheckerAnnotatorResult =
         if (holder.isBatchMode) {
             CheckerAnnotatorResult.Ok

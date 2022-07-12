@@ -13,4 +13,7 @@ public interface VomlExportStatement extends PsiElement {
   @Nullable
   VomlStringPrefix getStringPrefix();
 
+  @NotNull
+  PsiElement getExport();
+
 }

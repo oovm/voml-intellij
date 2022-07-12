@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface VomlInsertStar extends PsiElement {
 
+  @NotNull
+  PsiElement getStar();
+
 }

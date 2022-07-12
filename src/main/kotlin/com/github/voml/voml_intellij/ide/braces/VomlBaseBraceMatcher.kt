@@ -23,7 +23,7 @@ class VomlBaseBraceMatcher : PairedBraceMatcher {
             BracePair(VomlTypes.BRACE_L, VomlTypes.BRACE_R, true),
             BracePair(VomlTypes.BRACKET_L, VomlTypes.BRACKET_R, true),
             BracePair(VomlTypes.PARENTHESIS_L, VomlTypes.PARENTHESIS_R, true),
-            // BracePair(VomlTypes.EXT_PREFIX, VomlTypes.BRACKETR, false)
+            // @annotation()
         )
 
         private val InsertPairBraceBefore = TokenSet.orSet(

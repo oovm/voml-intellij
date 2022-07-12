@@ -65,15 +65,15 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
         />
         <annotator
             language="VOML"
-            implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlHighlightingAnnotator"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlStringEscapingAnnotator"
         />
         <annotator
             language="VOML"
-            implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlScopeCheckerAnnotator"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlScopeChecker"
         />
         <annotator
             language="VOML"
-            implementationClass="com.github.voml.voml_intellij.ide.annotator.checkers.VomlTableCheckerAnnotator"
+            implementationClass="com.github.voml.voml_intellij.ide.annotator.VomlTableChecker"
         />
         <additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
@@ -88,6 +88,8 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
             language="VOML"
             implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
         />
+        <!-- languages -->
+        <languageBundle locale="zh"/>
     </extensions>
     <actions>
         <action id="com.github.voml.voml_intellij.ide.actions.VomlCreateFile"

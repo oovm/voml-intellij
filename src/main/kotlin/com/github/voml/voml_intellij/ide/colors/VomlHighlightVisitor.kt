@@ -93,7 +93,5 @@ class VomlHighlightVisitor : VomlVisitor(), HighlightVisitor {
 
     override fun suitableForFile(file: PsiFile): Boolean = file is VomlFile
 
-    override fun order(): Int = 0
-
     override fun visit(element: PsiElement) = element.accept(this)
 }

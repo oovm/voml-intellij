@@ -10,4 +10,7 @@ public interface VomlRef extends PsiElement {
   @NotNull
   VomlSymbolPath getSymbolPath();
 
+  @NotNull
+  PsiElement getCite();
+
 }

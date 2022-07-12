@@ -39,4 +39,10 @@ public class VomlExportStatementImpl extends ASTWrapperPsiElement implements Vom
     return findChildByClass(VomlStringPrefix.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getExport() {
+    return findNotNullChildByType(EXPORT);
+  }
+
 }

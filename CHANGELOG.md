@@ -4,16 +4,22 @@
 
 ## [Unreleased]
 
+## [0.1.3]
+
+### New
+
+### FIX
+
 ## [0.1.2]
 
 ### Fix
-- The scope tag is not highlighted correctly
+- The scope tag did not highlight correctly
 
 ## [0.1.1]
-### Added
+### New
 - Syntax highlight for `@inherit` statement
 - Syntax highlight for `@include` statement
 
 ## [0.1.0]
-### Added
+### New
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)

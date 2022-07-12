@@ -75,4 +75,10 @@ public class VomlExpressionImpl extends ASTWrapperPsiElement implements VomlExpr
     return findChildByType(BACK_TOP);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getSemicolon() {
+    return findChildByType(SEMICOLON);
+  }
+
 }

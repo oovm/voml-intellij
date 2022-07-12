@@ -33,4 +33,10 @@ public class VomlRefImpl extends ASTWrapperPsiElement implements VomlRef {
     return findNotNullChildByClass(VomlSymbolPath.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getCite() {
+    return findNotNullChildByType(CITE);
+  }
+
 }

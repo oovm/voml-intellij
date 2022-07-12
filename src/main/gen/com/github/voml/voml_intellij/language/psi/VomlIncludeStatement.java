@@ -16,4 +16,25 @@ public interface VomlIncludeStatement extends PsiElement {
   @Nullable
   VomlStringPrefix getStringPrefix();
 
+  @Nullable
+  PsiElement getBraceL();
+
+  @Nullable
+  PsiElement getBraceR();
+
+  @Nullable
+  PsiElement getBracketL();
+
+  @Nullable
+  PsiElement getBracketR();
+
+  @NotNull
+  PsiElement getInclude();
+
+  @Nullable
+  PsiElement getParenthesisL();
+
+  @Nullable
+  PsiElement getParenthesisR();
+
 }

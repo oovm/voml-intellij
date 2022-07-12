@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface VomlAnnotationMark extends PsiElement {
 
   @NotNull
+  PsiElement getAt();
+
+  @NotNull
   PsiElement getSymbol();
 
 }

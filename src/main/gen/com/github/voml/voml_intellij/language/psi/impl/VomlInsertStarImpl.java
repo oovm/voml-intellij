@@ -27,4 +27,10 @@ public class VomlInsertStarImpl extends ASTWrapperPsiElement implements VomlInse
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getStar() {
+    return findNotNullChildByType(STAR);
+  }
+
 }

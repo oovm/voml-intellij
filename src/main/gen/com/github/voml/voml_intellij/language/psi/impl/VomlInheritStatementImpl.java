@@ -45,4 +45,10 @@ public class VomlInheritStatementImpl extends ASTWrapperPsiElement implements Vo
     return findChildByClass(VomlStringPrefix.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getInherit() {
+    return findNotNullChildByType(INHERIT);
+  }
+
 }

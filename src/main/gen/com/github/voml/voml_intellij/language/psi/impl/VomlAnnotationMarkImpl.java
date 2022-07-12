@@ -29,6 +29,12 @@ public class VomlAnnotationMarkImpl extends ASTWrapperPsiElement implements Voml
 
   @Override
   @NotNull
+  public PsiElement getAt() {
+    return findNotNullChildByType(AT);
+  }
+
+  @Override
+  @NotNull
   public PsiElement getSymbol() {
     return findNotNullChildByType(SYMBOL);
   }

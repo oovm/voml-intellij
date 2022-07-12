@@ -39,4 +39,16 @@ public class VomlPairImpl extends ASTWrapperPsiElement implements VomlPair {
     return findNotNullChildByClass(VomlValue.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getColon() {
+    return findChildByType(COLON);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getEq() {
+    return findChildByType(EQ);
+  }
+
 }

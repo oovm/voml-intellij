@@ -19,4 +19,22 @@ public interface VomlAnnotation extends PsiElement {
   @NotNull
   List<VomlValue> getValueList();
 
+  @Nullable
+  PsiElement getBraceL();
+
+  @Nullable
+  PsiElement getBraceR();
+
+  @Nullable
+  PsiElement getBracketL();
+
+  @Nullable
+  PsiElement getBracketR();
+
+  @Nullable
+  PsiElement getParenthesisL();
+
+  @Nullable
+  PsiElement getParenthesisR();
+
 }

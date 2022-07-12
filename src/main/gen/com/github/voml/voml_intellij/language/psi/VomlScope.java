@@ -13,4 +13,28 @@ public interface VomlScope extends PsiElement {
   @NotNull
   List<VomlStringInline> getStringInlineList();
 
+  @Nullable
+  PsiElement getAccent();
+
+  @Nullable
+  PsiElement getAngleR();
+
+  @Nullable
+  PsiElement getBraceL();
+
+  @Nullable
+  PsiElement getBraceR();
+
+  @Nullable
+  PsiElement getBracketL();
+
+  @Nullable
+  PsiElement getBracketR();
+
+  @Nullable
+  PsiElement getParenthesisL();
+
+  @Nullable
+  PsiElement getParenthesisR();
+
 }

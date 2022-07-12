@@ -31,4 +31,7 @@ public interface VomlExpression extends PsiElement {
   @Nullable
   PsiElement getBackTop();
 
+  @Nullable
+  PsiElement getSemicolon();
+
 }

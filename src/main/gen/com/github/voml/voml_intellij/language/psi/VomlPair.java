@@ -13,4 +13,10 @@ public interface VomlPair extends PsiElement {
   @NotNull
   VomlValue getValue();
 
+  @Nullable
+  PsiElement getColon();
+
+  @Nullable
+  PsiElement getEq();
+
 }

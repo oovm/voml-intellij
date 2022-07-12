@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface VomlInsertDot extends PsiElement {
 
+  @NotNull
+  PsiElement getDot();
+
 }

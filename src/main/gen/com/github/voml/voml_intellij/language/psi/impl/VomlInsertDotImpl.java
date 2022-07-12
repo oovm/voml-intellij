@@ -27,4 +27,10 @@ public class VomlInsertDotImpl extends ASTWrapperPsiElement implements VomlInser
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getDot() {
+    return findNotNullChildByType(DOT);
+  }
+
 }

@@ -45,4 +45,46 @@ public class VomlIncludeStatementImpl extends ASTWrapperPsiElement implements Vo
     return findChildByClass(VomlStringPrefix.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getBraceL() {
+    return findChildByType(BRACE_L);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getBraceR() {
+    return findChildByType(BRACE_R);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getBracketL() {
+    return findChildByType(BRACKET_L);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getBracketR() {
+    return findChildByType(BRACKET_R);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getInclude() {
+    return findNotNullChildByType(INCLUDE);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getParenthesisL() {
+    return findChildByType(PARENTHESIS_L);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getParenthesisR() {
+    return findChildByType(PARENTHESIS_R);
+  }
+
 }

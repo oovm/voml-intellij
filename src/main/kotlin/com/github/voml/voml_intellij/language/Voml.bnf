@@ -14,7 +14,7 @@
     tokenTypeClass = "com.github.voml.voml_intellij.language.psi.VomlTokenType"
 
     psiImplUtilClass = "com.github.voml.voml_intellij.language.psi.impl.VomlPsiImplUtil"
-
+    generateTokenAccessors = true
     tokens = [
         COMMENT = 'regexp:(//|#)[^\r\n]*'
         BLOCK_COMMENT = 'regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]'
