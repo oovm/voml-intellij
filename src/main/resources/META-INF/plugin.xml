@@ -2,15 +2,6 @@
     <id>com.github.voml.voml_intellij</id>
     <name>VOML Support</name>
     <vendor>voml</vendor>
-
-    <description><![CDATA[
-Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
-
-## Features
-- Syntax Highlight
-- Braces Matcher
-    ]]></description>
-
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
@@ -88,8 +79,6 @@ Intellij plugin for [VOML](https://github.com/voml), support all IDEs.
             language="VOML"
             implementationClass="com.github.voml.voml_intellij.ide.assist.fixers.VomlSmartEnterProcessor"
         />
-        <!-- languages -->
-        <languageBundle locale="zh"/>
     </extensions>
     <actions>
         <action id="com.github.voml.voml_intellij.ide.actions.VomlCreateFile"
